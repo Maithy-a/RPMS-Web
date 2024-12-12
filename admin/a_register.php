@@ -53,7 +53,6 @@ if (isset($_POST["submit"])) {
           echo "<script type='text/javascript'>alert('Registered successfully.');</script>";
           echo '<style>body{display:none;}</style>';
           echo '<script>window.location.href = "admin_home.php";</script>';
-
         }
       }
     }
@@ -73,9 +72,9 @@ if (isset($_POST["submit"])) {
 
   <title>Elsie Rental Management System</title>
   <link rel="apple-touch-icon" sizes="180x180" href="../res/img/favicon_io/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../res/img/favicon_io/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../res/img/favicon_io/favicon-16x16.png">
-<link rel="manifest" href="../res/img/favicon_io/site.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="../res/img/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../res/img/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="../res/img/favicon_io/site.webmanifest">
 
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -158,7 +157,7 @@ if (isset($_POST["submit"])) {
     </div>
   </div>
   <script type="text/javascript">
-    $('input[name = "radio"]').on('change', function () {
+    $('input[name = "radio"]').on('change', function() {
       $('input[name = "programme"]').attr('disabled', this.value != "Enable");
       $('input[name = "regno"]').attr('disabled', this.value != "Enable");
       $('input[name = "occupation"]').attr('disabled', this.value != "Disable");
@@ -166,13 +165,11 @@ if (isset($_POST["submit"])) {
       $('input[name = "regno"]').attr('required', this.value == "Enable");
       $('input[name = "occupation"]').attr('required', this.value == "Disable");
     });
-    <!-- Footer -->
-    <?php include '../footer.php'; ?>
-
-
   </script>
+  <?php include '../footer.php'; ?>
+
   <script type="text/javascript">
-    $("#durations").on('change', function () {
+    $("#durations").on('change', function() {
       $('#terms option[value = 2]').attr('disabled', this.value == 3);
       $('#terms option[value = 4]').attr('disabled', this.value == 3);
       $('#terms option[value = 4]').attr('disabled', this.value == 6);
@@ -180,23 +177,18 @@ if (isset($_POST["submit"])) {
     });
   </script>
   <script>
-    $(document).ready(function () {
-      $('input:checkbox').click(function () {
+    $(document).ready(function() {
+      $('input:checkbox').click(function() {
         $('input:checkbox').not(this).prop('checked', false);
       });
     });
   </script>
 
-  <script>if (window.history.replaceState) { window.history.replaceState(null, null, window.location.href); }
+  <script>
+    if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+    }
   </script>
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="js/jquery-1.12.4.min.js"></script><!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="js/sb-admin-2.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
