@@ -5,8 +5,15 @@ if (!($_SESSION['username'] == "ADMIN")) {
   echo '<script>window.location.href = "../log-in.php";</script>';
   exit();
 }
-?>
+function check($data)
+{
+  $data = trim($data);
+  $data = htmlspecialchars($data);
+  $data = stripslashes($data);
+  return $data;
+}
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,19 +31,17 @@ if (!($_SESSION['username'] == "ADMIN")) {
   <link rel="icon" type="image/png" sizes="16x16" href="../res/img/favicon_io/favicon-16x16.png">
   <link rel="manifest" href="../res/img/favicon_io/site.webmanifest">
 
-  <!-- FontAwesome for icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"
-    type="text/css">
-  <!-- Google Fonts (Nunito) -->
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap"
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
     rel="stylesheet">
-  <!-- SB Admin 2 Template CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.0.7/css/sb-admin-2.min.css"
+  <!-- Custom styles for this template-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/css/sb-admin-2.min.css"
     rel="stylesheet">
-  <!-- DataTables Bootstrap 4 CSS -->
-  <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -161,6 +166,7 @@ if (!($_SESSION['username'] == "ADMIN")) {
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
+
         <a class="nav-link" href="send-sms.php">
           <i class="fas fa-fw fa-comments"></i>
           <span>Messaging</span></a>
@@ -262,118 +268,29 @@ if (!($_SESSION['username'] == "ADMIN")) {
         </nav>
         <!-- End of Topbar -->
 
+        
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Houses</h1>
-
-          <div class="card shadow mb-4">
-
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>House Name</th>
-                      <th>Compartment</th>
-                      <th>Rent per Month(Ksh.)</th>
-                      <th>Status of the House</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-
-                    $sql = "SELECT * FROM house";
-                    $result = mysqli_query($con, $sql);
-                    $row = mysqli_fetch_assoc($result);
-
-                    do {
-                      $hname = $row['house_name'];
-                      $compartment = $row['compartment'];
-                      $rent = $row['rent_per_month'];
-                      $stat = $row['status'];
-                      if ($stat == 'Occupied') {
-                        echo '<tr>';
-                        echo '<td>' . $hname . '</td>';
-                        echo '<td>' . $compartment . '</td>';
-                        echo '<td>' . number_format($rent) . '/=</td>';
-                        echo "<td style = 'color:green;'>" . $stat . "</td>";
-                        echo "<td align = 'center'><a href='delete_house.php?id=" . $row['house_id'] . "' class='btn btn-danger btn-circle'><i class='fas fa-trash'></i></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='edit_house.php?id=" . $row['house_id'] . "' class='btn btn-success btn-circle'><i class='fas fa-edit'></i></a></td>";
-                        echo '</tr>';
-                      } else {
-                        echo '<tr>';
-                        echo '<td>' . $hname . '</td>';
-                        echo '<td>' . $compartment . '</td>';
-                        echo '<td>' . number_format($rent) . '/=</td>';
-                        echo "<td style = 'color:red;'>" . $stat . "</td>";
-                        echo "<td align = 'center'><a href='delete_house.php?id=" . $row['house_id'] . "' class='btn btn-danger btn-circle'><i class='fas fa-trash'></i></a></td>";
-                        echo '</tr>';
-                      }
-
-                      $row = mysqli_fetch_assoc($result);
-                    } while ($row);
-
-
-                    ?>
-
-                  </tbody>
-                </table>
-                <hr>
-
-                <br />
-                <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
-                  <tbody>
-                    <?php
-
-                    $sql = "SELECT * FROM house";
-                    $result = mysqli_query($con, $sql);
-                    echo '<tr>';
-                    echo '<td><b><b>TOTAL NUMBER OF HOUSES</b></b></td>';
-                    echo '<td><b><b>' . mysqli_num_rows($result) . '</b></b></td>';
-                    echo '</tr>';
-
-                    $sql1 = "SELECT * FROM house WHERE status = 'Occupied'";
-                    $result1 = mysqli_query($con, $sql1);
-                    echo '<tr>';
-                    echo "<td><b><b>TOTAL NUMBER OF <span style = 'color:green;'>OCCUPIED</span> HOUSES</b></b></td>";
-                    echo "<td><b><b><span style = 'color:green;'>" . mysqli_num_rows($result1) . "</span></b></b></td>";
-                    echo '</tr>';
-
-                    $sql2 = "SELECT * FROM house WHERE status = 'Empty'";
-                    $result2 = mysqli_query($con, $sql2);
-                    echo '<tr>';
-                    echo "<td><b><b>TOTAL NUMBER OF <span style = 'color:red;'>EMPTY</span> HOUSES</b></b></td>";
-                    echo "<td><b><b><span style = 'color:red;'>" . mysqli_num_rows($result2) . "</span></b></b></td>";
-                    echo '</tr>';
-
-                    $sql3 = "SELECT * FROM house WHERE compartment = 'Yes'";
-                    $result3 = mysqli_query($con, $sql3);
-                    echo '<tr>';
-                    echo "<td><b><b>TOTAL NUMBER OF HOUSES <span style = 'color:green;'>WITH</span> COMPARTMENTS</b></b></td>";
-                    echo "<td><b><b><span style = 'color:green;'>" . mysqli_num_rows($result3) . "</span></b></b></td>";
-                    echo '</tr>';
-
-                    $sql4 = "SELECT * FROM house WHERE compartment = 'No'";
-                    $result4 = mysqli_query($con, $sql4);
-                    echo '<tr>';
-                    echo "<td><b><b>TOTAL NUMBER OF HOUSES <span style = 'color:red;'>WITHOUT</span> COMPARTMENTS</b></b></td>";
-                    echo "<td><b><b><span style = 'color:red;'>" . mysqli_num_rows($result4) . "</span></b></b></td>";
-                    echo '</tr>';
-                    ?>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          <!-- 404 Error Text -->
+          <div class="text-center">
+            <div class="error mx-auto" data-text="404">404</div>
+            <p class="lead text-gray-800 mb-5">Page Not Found</p>
+            <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
+            <a href="waiting.php">&larr; Back to Dashboard</a>
           </div>
-
+          <p class="mb-4">For more information or help please kindly contact us through:<br /><br /><b>Phone Number: +255 (0) 756 777 777.<br />Email Address: rhms123@hotmail.com.</b></p>
         </div>
         <!-- /.container-fluid -->
 
+
+
       </div>
       <!-- End of Main Content -->
+
+      <!-- Footer -->
       <?php include '../footer.php'; ?>
+      <!-- End of Footer -->
 
     </div>
     <!-- End of Content Wrapper -->
@@ -406,46 +323,18 @@ if (!($_SESSION['username'] == "ADMIN")) {
     </div>
   </div>
 
+
+
   <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- Bootstrap Bundle -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
-
-  <!-- jQuery Easing Plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-
-  <!-- SB Admin 2 Custom Script -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.0.7/js/sb-admin-2.min.js"></script>
-
-  <!-- DataTables jQuery Plugin -->
-  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-
-  <!-- DataTables Bootstrap 4 Integration -->
-  <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
-
-  <!-- Custom DataTables Demo Script -->
-  <script src="js/demo/datatables-demo.js"></script>
-  <!-- jQuery -->
+  <!-- Custom scripts for all pages -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/js/sb-admin-2.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- DataTables JavaScript -->
-  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
-
-  <!-- Initialize DataTables -->
-  <script>
-    $(document).ready(function() {
-      $('#dataTable').DataTable({
-        "paging": true,
-        "searching": true,
-        "ordering": true,
-        "info": true
-      });
-    });
-  </script>
-
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

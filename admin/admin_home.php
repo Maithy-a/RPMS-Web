@@ -38,6 +38,7 @@ if ($_SESSION['username'] != "ADMIN") {
     rel="stylesheet">
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
@@ -245,11 +246,10 @@ if ($_SESSION['username'] != "ADMIN") {
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php
+                                                                          $uname = $_SESSION['username'];
+                                                                          echo "<b><b>" . $uname . "</b></b>";
 
-                $uname = $_SESSION['username'];
-                echo "<b><b>" . $uname . "</b></b>";
-
-                ?></span>
+                                                                          ?></span>
                 <img class="img-profile rounded-circle" src="../res/img/user.png">
               </a>
               <!-- Dropdown - User Information -->
@@ -264,7 +264,7 @@ if ($_SESSION['username'] != "ADMIN") {
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
-
+              </div>
             </li>
 
           </ul>
@@ -292,11 +292,11 @@ if ($_SESSION['username'] != "ADMIN") {
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Number of Tenants
                       </div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><?php
-                      $sql = "SELECT * FROM tenant";
-                      $query = mysqli_query($con, $sql);
-                      $num = mysqli_num_rows($query);
-                      echo $num;
-                      ?></div>
+                                                                          $sql = "SELECT * FROM tenant";
+                                                                          $query = mysqli_query($con, $sql);
+                                                                          $num = mysqli_num_rows($query);
+                                                                          echo $num;
+                                                                          ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -315,11 +315,11 @@ if ($_SESSION['username'] != "ADMIN") {
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Number of Houses
                       </div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><?php
-                      $sql = "SELECT * FROM house";
-                      $query = mysqli_query($con, $sql);
-                      $num = mysqli_num_rows($query);
-                      echo $num;
-                      ?></div>
+                                                                          $sql = "SELECT * FROM house";
+                                                                          $query = mysqli_query($con, $sql);
+                                                                          $num = mysqli_num_rows($query);
+                                                                          echo $num;
+                                                                          ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-home fa-2x text-gray-300"></i>
@@ -336,11 +336,11 @@ if ($_SESSION['username'] != "ADMIN") {
                     <div class="col mr-2 d-flex align-items-center">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Income</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800 ml-2"><?php
-                      $sql = "SELECT SUM(amount) FROM payment";
-                      $query = mysqli_query($con, $sql);
-                      $res = mysqli_fetch_assoc($query);
-                      echo "Ksh. " . number_format($res['SUM(amount)']) . "/=";
-                      ?></div>
+                                                                                $sql = "SELECT SUM(amount) FROM payment";
+                                                                                $query = mysqli_query($con, $sql);
+                                                                                $res = mysqli_fetch_assoc($query);
+                                                                                echo "Ksh. " . number_format($res['SUM(amount)']) . "/=";
+                                                                                ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -357,11 +357,11 @@ if ($_SESSION['username'] != "ADMIN") {
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Active Contracts</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><?php
-                      $sql = "SELECT * FROM contract WHERE status = 'Active'";
-                      $query = mysqli_query($con, $sql);
-                      $num = mysqli_num_rows($query);
-                      echo $num;
-                      ?></div>
+                                                                          $sql = "SELECT * FROM contract WHERE status = 'Active'";
+                                                                          $query = mysqli_query($con, $sql);
+                                                                          $num = mysqli_num_rows($query);
+                                                                          echo $num;
+                                                                          ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -392,8 +392,9 @@ if ($_SESSION['username'] != "ADMIN") {
           <!-- Include Bootstrap JavaScript -->
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
           <!-- Chart.js Initialization -->
+
           <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
               var ctx = document.getElementById("myAreaChart").getContext('2d');
 
               // Fetch data from the server
@@ -441,7 +442,7 @@ if ($_SESSION['username'] != "ADMIN") {
                         },
                         y: {
                           ticks: {
-                            callback: function (value) {
+                            callback: function(value) {
                               return 'Ksh ' + number_format(value);
                             }
                           },
@@ -470,7 +471,7 @@ if ($_SESSION['username'] != "ADMIN") {
                           mode: 'index',
                           caretPadding: 10,
                           callbacks: {
-                            label: function (tooltipItem, chart) {
+                            label: function(tooltipItem, chart) {
                               var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                               return datasetLabel + ': Ksh ' + number_format(tooltipItem.raw);
                             }
@@ -489,7 +490,7 @@ if ($_SESSION['username'] != "ADMIN") {
                   sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
                   dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
                   s = '',
-                  toFixedFix = function (n, prec) {
+                  toFixedFix = function(n, prec) {
                     var k = Math.pow(10, prec);
                     return '' + Math.round(n * k) / k;
                   };
@@ -544,15 +545,13 @@ if ($_SESSION['username'] != "ADMIN") {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
     <!-- Bootstrap core JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
     <!-- Core plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-
     <!-- Custom scripts for all pages -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/js/sb-admin-2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

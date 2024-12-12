@@ -5,6 +5,14 @@ if (!($_SESSION['username'] == "ADMIN")) {
   echo '<script>window.location.href = "../log-in.php";</script>';
   exit();
 }
+function check($data)
+{
+  $data = trim($data);
+  $data = htmlspecialchars($data);
+  $data = stripslashes($data);
+  return $data;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,22 +31,17 @@ if (!($_SESSION['username'] == "ADMIN")) {
   <link rel="icon" type="image/png" sizes="16x16" href="../res/img/favicon_io/favicon-16x16.png">
   <link rel="manifest" href="../res/img/favicon_io/site.webmanifest">
 
-  <!-- Custom fonts for this template -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
     rel="stylesheet">
-
-  <!-- Custom styles for this template -->
+  <!-- Custom styles for this template-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/css/sb-admin-2.min.css"
     rel="stylesheet">
-
-  <!-- Custom styles for this page -->
-  <link href="https://cdn.datatables.net/2.1.4/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -168,6 +171,28 @@ if (!($_SESSION['username'] == "ADMIN")) {
           <i class="fas fa-fw fa-comments"></i>
           <span>Messaging</span></a>
       </li>
+      <hr class="sidebar-divider">
+
+
+
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="a_change.php">
+          <i class="fas fa-fw fa-exchange-alt"></i>
+          <span>Change Password</span>
+        </a>
+
+      </li>
+      <hr class="sidebar-divider">
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="a_register.php">
+          <i class="fas fa-fw fa-user"></i>
+          <span>Register</span>
+        </a>
+
+      </li>
 
       <!-- Nav Item - Tables -->
 
@@ -217,22 +242,25 @@ if (!($_SESSION['username'] == "ADMIN")) {
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php
+                                                                          $uname = $_SESSION['username'];
+                                                                          echo "<b><b>" . $uname . "</b></b>";
 
-                include "../conn.php";
-                $uname = $_SESSION['username'];
-                echo "<b><b>" . $uname . "</b></b>";
-
-                ?></span>
+                                                                          ?></span>
                 <img class="img-profile rounded-circle" src="../res/img/user.png">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Settings
+                </a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
-
+              </div>
             </li>
 
           </ul>
@@ -241,6 +269,7 @@ if (!($_SESSION['username'] == "ADMIN")) {
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
+
         <div class="container-fluid">
 
           <!-- Page Heading -->
@@ -404,13 +433,7 @@ if (!($_SESSION['username'] == "ADMIN")) {
                       echo '<style>body{display:none;}</style>';
                       echo '<script>window.location.href = "contract_detail.php";</script>';
                       exit;
-
                     }
-
-
-
-
-
                   }
                   ?>
                 </table>
@@ -420,6 +443,8 @@ if (!($_SESSION['username'] == "ADMIN")) {
 
         </div>
         <!-- /.container-fluid -->
+
+
 
       </div>
       <!-- End of Main Content -->
@@ -460,136 +485,18 @@ if (!($_SESSION['username'] == "ADMIN")) {
   </div>
 
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $("input[name='price']").click(function () {
-        var radioValue = $("input[name='price']:checked").val();
-        if (radioValue == 50000) {
-          var out = "<?php $con = mysqli_connect('localhost', 'root', '');
-          mysqli_select_db($con, 'rental_house');
-          $sql = "SELECT house_id,house_name FROM house WHERE rent_per_month = '50000' AND status = 'Empty'";
-          $res = mysqli_query($con, $sql);
-          $row = mysqli_fetch_assoc($res);
 
-
-          if (mysqli_num_rows($res) > 0) {
-
-            do {
-
-              echo "<option value ='" . $row["house_id"] . "'>" . $row["house_name"] . "</option>";
-              $row = mysqli_fetch_assoc($res);
-            } while ($row);
-
-          } else {
-
-            echo "<option selected disabled>No rooms available</option>";
-
-          }
-
-
-          ?>";
-      document.getElementById("values").innerHTML = out;
-
-    }else if (radioValue == 60000) {
-      var out = "<?php $con = mysqli_connect('localhost', 'root', '');
-      mysqli_select_db($con, 'rental_house');
-      $sql = "SELECT house_id,house_name FROM house WHERE rent_per_month = '60000' AND status = 'Empty'";
-      $res = mysqli_query($con, $sql);
-      $row = mysqli_fetch_assoc($res);
-      if (mysqli_num_rows($res) > 0) {
-
-        do {
-
-          echo "<option value ='" . $row["house_id"] . "' selected>" . $row["house_name"] . "</option>";
-          $row = mysqli_fetch_assoc($res);
-        } while ($row);
-
-      } else {
-
-        echo "<option selected disabled>No rooms available</option>";
-
-      }
-
-      ?>";
-    document.getElementById("values").innerHTML = out;
-               }else if (radioValue == 70000) {
-      var out = "<?php $con = mysqli_connect('localhost', 'root', '');
-      mysqli_select_db($con, 'rental_house');
-      $sql = "SELECT house_id,house_name FROM house WHERE rent_per_month = '70000' AND status = 'Empty'";
-      $res = mysqli_query($con, $sql);
-      $row = mysqli_fetch_assoc($res);
-
-      if (mysqli_num_rows($res) > 0) {
-
-        do {
-
-          echo "<option value ='" . $row["house_id"] . "'>" . $row["house_name"] . "</option>";
-          $row = mysqli_fetch_assoc($res);
-        } while ($row);
-
-      } else {
-
-        echo "<option selected disabled>No rooms available</option>";
-
-      }
-
-      ?>";
-    document.getElementById("values").innerHTML = out;
-               }else {
-      var out = "<?php $con = mysqli_connect('localhost', 'root', '');
-      mysqli_select_db($con, 'rental_house');
-      $sql = "SELECT house_id,house_name FROM house WHERE rent_per_month = '80000' AND status = 'Empty'";
-      $res = mysqli_query($con, $sql);
-      $row = mysqli_fetch_assoc($res);
-
-      if (mysqli_num_rows($res) > 0) {
-
-        do {
-
-          echo "<option value ='" . $row["house_id"] . "'>" . $row["house_name"] . "</option>";
-          $row = mysqli_fetch_assoc($res);
-        } while ($row);
-
-      } else {
-
-        echo "<option selected disabled>No rooms available</option>";
-
-      }
-
-      ?>";
-    document.getElementById("values").innerHTML = out;
-               }
-           });
-
-       });
-  </script>
-
-  <script>
-    if (window.history.replaceState) {
-      window.history.replaceState(null, null, window.location.href);
-    }
-  </script>
-
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
-  <script src="js/jquery.min.js"></script>
-
-  <!-- Page level plugins -->
-  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="js/demo/datatables-demo.js"></script>
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+  <!-- Custom scripts for all pages -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/js/sb-admin-2.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

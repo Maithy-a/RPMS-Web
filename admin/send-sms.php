@@ -290,45 +290,18 @@ if (isset($_POST['smsg'])) {
         </nav>
         <!-- End of Topbar -->
 
+       
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800" align="center">Messages</h1>
-
-
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
-
-                  <tbody>
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                      <tr>
-                        <td>
-                          To:
-                        </td>
-                        <td><input type='text' class='form-control form-control-user' name='pno'></td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Message:
-                        </td>
-                        <td><textarea class='form-control' name="msg"><?php echo @$msg; ?></textarea></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td><input class='btn btn-success btn-user btn-lg' type='submit' name='smsg'
-                            value='Send Message'></td>
-                    </form>
-                    <tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          <!-- 404 Error Text -->
+          <div class="text-center">
+            <div class="error mx-auto" data-text="404">404</div>
+            <p class="lead text-gray-800 mb-5">Page Not Found</p>
+            <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
+            <a href="waiting.php">&larr; Back to Dashboard</a>
           </div>
-
+          <p class="mb-4">For more information or help please kindly contact us through:<br /><br /><b>Phone Number: +255 (0) 756 777 777.<br />Email Address: rhms123@hotmail.com.</b></p>
         </div>
         <!-- /.container-fluid -->
 
