@@ -26,66 +26,51 @@
     <div></div>
     <div></div>
   </div>
-  <script>
-    window.onload = function() {
-      document.querySelector('.loader').classList.add('hidden');
-      document.querySelector('.content').classList.remove('blurred-content');
-    };
-  </script>
   <div class="blurred-content">
+
     <nav class="navbar">
-      <div class="container">
-        <div class="navbar-header">
-          <button class="navbar-toggler" data-toggle="open-navbar1">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <a href="#home">
-            <h4>Elsie<span>Executive</span></h4>
-          </a>
-        </div>
+      <div class="navbar-header">
+        <button class="navbar-toggler" data-toggle="open-navbar1">
+          <i class="bi bi-list" id="Nav-list"></i>
+        </button>
+        <a href="#home">
+          <h2><span>Elsie</span>Executive</h2>
+        </a>
+      </div>
 
-        <div class="navbar-menu" id="open-navbar1">
-          <ul class="navbar-nav">
-            <li class="active"><a href="#home">Home</a></li>
+      <div class="navbar-menu" id="open-navbar1">
+        <ul class="navbar-nav">
+          <li class="active"><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#houses">Houses</a></li>
+          <li><a href="#">Contact</a></li>
+          <li class="navbar-dropdown">
+            <a href="#" class="dropdown-toggler" data-dropdown="my-dropdown-id">
+              Sign in as<i class="bi bi-chevron-down"></i>
+            </a>
 
-            <li class="navbar-dropdown">
-              <a href="#" class="dropdown-toggler" data-dropdown="my-dropdown-id">
-                Sign in as <i class="fa fa-angle-down"></i>
-              </a>
-
-              <ul class="dropdown" id="my-dropdown-id">
-                <li>
-                  <a href="log-in.php"><i class="fa fa-user-shield"></i> Administrator </a>
-                </li>
-                <li class="separator"></li>
-
-                <li>
-                  <a href="login.php"><i class="fa fa-user"></i> Tenant </a>
-                </li>
-                <li class="separator"></li>
-
-                <li>
-                  <a href="login.php"><i class="fa fa-user-tie"></i> Manager</a>
-                </li>
-                <li class="separator"></li>
-
-              </ul>
-            </li>
-
-            <li><a href="#about">About</a></li>
-            <li><a href="#houses">Houses</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="Register.php">Register</a></li>
-          </ul>
-        </div>
+            <ul class="dropdown" id="my-dropdown-id">
+              <li>
+                <a href="log-in.php">Administrator </a>
+              </li>
+              <li class="separator"></li>
+              <li>
+                <a href="login.php">Tenant </a>
+              </li>
+              <li class="separator"></li>
+              <li>
+                <a href="login.php">Manager</a>
+              </li>
+            </ul>
+          </li>
+          <li><a href="Register.php">Register</a></li>
+        </ul>
       </div>
     </nav>
 
 
     <section id="home" class="home-section">
-      <div class="container">
+      <div class="home-container">
         <div class="slider-container">
           <!-- Parking -->
           <div class="slide active" id="slide1">
@@ -97,7 +82,7 @@
                 drive a car or own a motorcycle, our parking area is spacious and conveniently located just steps from
                 your apartment. Experience hassle-free parking at Elsie Executive Apartments, where your vehicle is as
                 well cared for as your home.</p>
-              <a href="#" class="btn">Read More</a>
+              <a href="#" class="home-btn">Read More</a>
             </div>
             <img src="res/img/parking-2.png" alt="Parking Facility">
           </div>
@@ -113,9 +98,9 @@
                 abundant natural light make every moment in the kitchen enjoyable. The open design not only enhances
                 your cooking experience but also allows you to stay connected with family and guests, making it the
                 heart of your home.</p>
-              <a href="#" class="btn">Read More</a>
+              <a href="#" class="home-btn">Read More</a>
             </div>
-            <img src="res/img/Open-Kitchen.jpg" alt="Open Kitchen Design" loading="lazy">
+            <img src="res/img/Open-Kitchen.jpg" alt="Open-Kitchen" loading="lazy">
           </div>
 
           <!-- Space -->
@@ -125,21 +110,21 @@
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit voluptatum harum fugiat. Vero et
                 repudiandae eligendi modi ea aspernatur id ab dicta adipisci? Alias, ad? Aliquam, id! Ab, voluptatum
                 ipsa?</p>
-              <a href="#" class="btn">Read More</a>
+              <a href="#" class="home-btn">Read More</a>
             </div>
             <img src="res/img/Space.jpg" alt="Spacious Rooms" loading="lazy">
           </div>
 
           <!-- Navigation arrows -->
-            <i class="bi bi-chevron-left" id="prevBtn"></i>
-            <i class="bi bi-chevron-right" id="nextBtn"></i>
-        
+          <i class="bi bi-chevron-left" id="prevBtn"></i>
+          <i class="bi bi-chevron-right" id="nextBtn"></i>
+
         </div>
       </div>
     </section>
 
     <section id="about" class="about-section">
-      <div class="container">
+      <div class="about-container">
         <h2>About Elsie Executive Apartments</h2>
         <div class="about-content">
           <div class="about-text">
@@ -162,9 +147,7 @@
       </div>
 
       <!-- Back to Top Button -->
-      <button type="button" class="btn btn-primary btn-floating" style="background-color:#3586ff;" id="btn-back-to-top">
-        <i class="fas fa-arrow-up"></i>
-      </button>
+      <i class="bi bi-chevron-up" id="btn-back-to-top"></i>
 
       <script>
         window.onscroll = function() {
@@ -185,7 +168,6 @@
         });
       </script>
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.5.0/mdb.min.js"></script>
     </section>
 
     <footer class="footer">
@@ -233,8 +215,10 @@
         <li class="menu__item"><a class="menu__link" href="#">Blog</a></li>
         <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
       </ul>
+
       <p>
-        <span>All rights reserved Elsie-executive Appartments <i class="bi bi-c-circle"></i> <span id="currentYear"></span></span>
+        <span><i class="bi bi-c-circle"></i> CopyRight, ElsieExecutive. All Rights Reserved
+          <span id="currentYear"></span></span>
         <script>
           document.getElementById("currentYear").textContent = new Date().getFullYear();
         </script>

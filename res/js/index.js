@@ -54,35 +54,29 @@ function handleSmallScreens() {
 handleSmallScreens();
 
 //curosell
-let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
-const totalSlides = slides.length;
-let slideInterval;
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+let currentSlide = 0;
 
-const showSlide = (n) => {
-  slides[currentSlide].classList.remove('active');
-  currentSlide = (n + totalSlides) % totalSlides;
-  slides[currentSlide].classList.add('active');
+function updateSlides() {
+  slides.forEach((slide, index) => {
+    slide.classList.remove('active'); // Remove active class from all slides
+  });
+  slides[currentSlide].classList.add('active'); // Add active class to the current slide
 }
 
-const nextSlide = () => showSlide(currentSlide + 1);
+prevBtn.addEventListener('click', () => {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length; // Loop back if at the first slide
+  updateSlides();
+});
 
-const prevSlide = () => showSlide(currentSlide - 1);
+nextBtn.addEventListener('click', () => {
+  currentSlide = (currentSlide + 1) % slides.length; // Loop to the first slide if at the last
+  updateSlides();
+});
 
-const startSlideShow = () => slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+// Initialize the first slide
+updateSlides();
 
-const stopSlideShow = () => clearInterval(slideInterval);
-
-document.getElementById('prevBtn').addEventListener('click', prevSlide);
-document.getElementById('nextBtn').addEventListener('click', nextSlide);
-
-// Pause the slideshow when the mouse is over the slider
-document.querySelector('.slider-container').addEventListener('mouseenter', stopSlideShow);
-
-// Restart the slide show when the mouse leaves the slider
-document.querySelector('.slider-container').addEventListener('mouseleave', startSlideShow);
-
-// Show the first slide and start the slide show when the page loads
-showSlide(currentSlide);
-startSlideShow();
 
