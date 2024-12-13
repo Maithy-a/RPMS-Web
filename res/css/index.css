@@ -489,24 +489,29 @@ img {
   height: auto;
   box-sizing: border-box;
 }
-
-.arrow {
+#prevBtn, #nextBtn {
   position: absolute;
   top: 50%;
-  font-size: 24px;
+  font-size: 27px;
   color: #fff;
-  background: none;
-  border: none;
+  background-color: rgba(0, 0, 0, 0.5); 
+  padding: 10px; 
   cursor: pointer;
-  outline: none;
+  transform: translateY(-50%);
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+#prevBtn:hover, #nextBtn:hover {
+  background-color: #ffffffcc; 
+  color: #000; 
 }
 
 #prevBtn {
-  left: 10px;
+  left: 10px; 
 }
 
 #nextBtn {
-  right: 10px;
+  right: 10px; 
 }
 
 /* Background colors for each slide*/
