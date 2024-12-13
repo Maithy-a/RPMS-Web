@@ -13,8 +13,10 @@
 
   <link rel="stylesheet" href="res/css/index.css">
   <link rel="stylesheet" href="res/css/loader.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.5.0/mdb.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
 
@@ -24,13 +26,7 @@
     <div></div>
     <div></div>
   </div>
-  <script>
-    window.onload = function () {
-      document.querySelector('.loader').classList.add('hidden');
-      document.querySelector('.content').classList.remove('blurred-content');
-    };
 
-  </script>
   <div class="blurred-content">
     <nav class="navbar">
       <div class="container">
@@ -56,17 +52,17 @@
 
               <ul class="dropdown" id="my-dropdown-id">
                 <li>
-                  <a href="log-in.php"><i class="fa fa-user-shield"></i> Administrator </a>
+                  <a href="log-in.php">Administrator </a>
                 </li>
                 <li class="separator"></li>
 
                 <li>
-                  <a href="login.php"><i class="fa fa-user"></i> Tenant </a>
+                  <a href="login.php"> Tenant </a>
                 </li>
                 <li class="separator"></li>
 
                 <li>
-                  <a href="login.php"><i class="fa fa-user-tie"></i> Manager</a>
+                  <a href="login.php"> Manager</a>
                 </li>
                 <li class="separator"></li>
 
@@ -130,8 +126,10 @@
           </div>
 
           <!-- Navigation arrows -->
-          <i class="arrow fa-solid fa-arrow-left" id="prevBtn"></i>
-          <i class="arrow fa-solid fa-arrow-right" id="nextBtn"></i>
+          <div class="nav-arrows">
+            <i class="bi bi-chevron-left" id="prevBtn"></i>
+            <i class="arrow fa-solid fa-arrow-right" id="nextBtn"></i>
+          </div>
         </div>
       </div>
     </section>
@@ -165,7 +163,7 @@
       </button>
 
       <script>
-        window.onscroll = function () {
+        window.onscroll = function() {
           const backToTopButton = document.getElementById('btn-back-to-top');
           if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
             backToTopButton.style.display = 'block';
@@ -174,9 +172,12 @@
           }
         };
 
-        document.getElementById('btn-back-to-top').addEventListener('click', function (event) {
+        document.getElementById('btn-back-to-top').addEventListener('click', function(event) {
           event.preventDefault();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
         });
       </script>
 
@@ -220,7 +221,9 @@
         <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
       </ul>
       <p><span>Copyright &copy; <span id="currentYear"></span> Elsie-executive Appartments | All rights reserved</span>
-        <script>document.getElementById("currentYear").textContent = new Date().getFullYear();</script>
+        <script>
+          document.getElementById("currentYear").textContent = new Date().getFullYear();
+        </script>
       </p>
     </footer>
   </div>
@@ -229,8 +232,8 @@
   <script src="res/js/index.js" defer></script>
 
   <script>
-    window.addEventListener('load', function () {
-      setTimeout(function () {
+    window.addEventListener('load', function() {
+      setTimeout(function() {
         document.querySelector('.loader').style.display = 'none';
         document.querySelector('.blurred-content').style.filter = 'none';
       }, 2000);
