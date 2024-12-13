@@ -5,8 +5,15 @@ if (!($_SESSION['username'] == "ADMIN")) {
   echo '<script>window.location.href = "../log-in.php";</script>';
   exit();
 }
-?>
+function check($data)
+{
+  $data = trim($data);
+  $data = htmlspecialchars($data);
+  $data = stripslashes($data);
+  return $data;
+}
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,19 +31,21 @@ if (!($_SESSION['username'] == "ADMIN")) {
   <link rel="icon" type="image/png" sizes="16x16" href="../res/img/favicon_io/favicon-16x16.png">
   <link rel="manifest" href="../res/img/favicon_io/site.webmanifest">
 
-  <!-- FontAwesome for icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"
-    type="text/css">
-  <!-- Google Fonts (Nunito) -->
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap"
+ <!-- Google Fonts -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
-  <!-- SB Admin 2 Template CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.0.7/css/sb-admin-2.min.css"
-    rel="stylesheet">
-  <!-- DataTables Bootstrap 4 CSS -->
-  <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+  <!-- SB Admin 2 CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/css/sb-admin-2.min.css" rel="stylesheet">
 
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+
+  <!-- DataTables Bootstrap Integration -->
+  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -161,6 +170,7 @@ if (!($_SESSION['username'] == "ADMIN")) {
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
+
         <a class="nav-link" href="send-sms.php">
           <i class="fas fa-fw fa-comments"></i>
           <span>Messaging</span></a>
@@ -370,10 +380,16 @@ if (!($_SESSION['username'] == "ADMIN")) {
 
         </div>
         <!-- /.container-fluid -->
+        
+
+
 
       </div>
       <!-- End of Main Content -->
+
+      <!-- Footer -->
       <?php include '../footer.php'; ?>
+      <!-- End of Footer -->
 
     </div>
     <!-- End of Content Wrapper -->
@@ -406,35 +422,30 @@ if (!($_SESSION['username'] == "ADMIN")) {
     </div>
   </div>
 
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <!-- Bootstrap Bundle -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
   <!-- jQuery Easing Plugin -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
   <!-- SB Admin 2 Custom Script -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.0.7/js/sb-admin-2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/js/sb-admin-2.min.js"></script>
 
   <!-- DataTables jQuery Plugin -->
   <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
-  <!-- DataTables Bootstrap 4 Integration -->
+  <!-- DataTables Bootstrap Integration -->
   <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 
-  <!-- Custom DataTables Demo Script -->
-  <script src="js/demo/datatables-demo.js"></script>
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- DataTables JavaScript -->
-  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+  <!-- Bootstrap 4.5.2 Bundle (Fallback) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Initialize DataTables -->
+  <!-- DataTables Demo Script -->
   <script>
     $(document).ready(function() {
       $('#dataTable').DataTable({
@@ -445,7 +456,6 @@ if (!($_SESSION['username'] == "ADMIN")) {
       });
     });
   </script>
-
 
 </body>
 
