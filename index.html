@@ -22,227 +22,195 @@
 
 <body>
 
-  <!-- <div class="loader">
+  <div class="loader">
     <div></div>
     <div></div>
   </div>
-  <div class="blurred-content"> -->
+  <div class="blurred-content">
 
-  <nav class="navbar">
-    <div class="navbar-header">
-      <button class="navbar-toggler" data-toggle="open-navbar1">
-        <i class="bi bi-list" id="Nav-list"></i>
-      </button>
-      <a href="#home">
-        <h2><span>Elsie</span>Executive</h2>
-      </a>
-    </div>
-
-    <div class="navbar-menu" id="open-navbar1">
-      <ul class="navbar-nav">
-        <li class="active"><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#houses">Houses</a></li>
-        <li><a href="#">Contact</a></li>
-        <li class="navbar-dropdown">
-          <a href="#" class="dropdown-toggler" data-dropdown="my-dropdown-id">
-            Login <i class="bi bi-chevron-down"></i>
-          </a>
-
-          <ul class="dropdown" id="my-dropdown-id">
-            <li>
-              <a href="login.php">Tenant </a>
-            </li>
-            <li class="separator"></li>
-            <li>
-              <a href="login.php">Caretaker</a>
-            </li>
-            <li class="separator"></li>
-            <li>
-              <a href="log-in.php">Lardlord</a>
-            </li>
-            <li class="separator"></li>
-          </ul>
-        </li>
-        <li><a href="Register.php">Register</a></li>
-      </ul>
-    </div>
-  </nav>
-
-
-  <section id="home" class="home-section">
-    <div class="home-container">
-      <div class="slider-container">
-        <!-- Slide 1 -->
-        <div class="slide active" id="slide1">
-          <div class="image-container">
-            <img src="res/img/Space.jpg" alt="Spacious Rooms">
-          </div>
-          <div class="text-box">
-            <h2>Welcome to Elsie</h2>
-            <p>Discover the ultimate in comfort and style with our spacious rooms at Elsie Executive Apartments! I
-              love how every room is designed with plenty of space to breathe, relax, and truly make it my own. The
-              large windows flood the space with natural light, creating a bright and airy vibe that feels so
-              inviting. With sleek finishes, modern touches, and layouts that perfectly blend style and functionality,
-              these rooms are everything I need for relaxing evenings or hosting friends. Come see for yourself why
-              Elsie Executive Apartments isn’t just a place to live—it’s a place to thrive!</p>
-            <a href="#" class="home-btn">Read More <i class="bi bi-box-arrow-in-up-right"></i></a>
-          </div>
-        </div>
-        <div class="slide " id="slide2">
-          <div class="image-container">
-            <img src="res/img/parking-2.png" alt="Spacious Rooms">
-          </div>
-          <div class="text-box">
-            <h2>Spacious Rooms</h2>
-            <p>Step into the heart of Elsie Executive Apartments and experience the magic of our open kitchen design!
-              I absolutely love how it perfectly blends modern style with practical functionality, giving me the ideal
-              space for all my culinary adventures. The spacious layout flows effortlessly into the living area,
-              creating a warm and inviting vibe that’s perfect for socializing. With sleek countertops, premium
-              appliances, and plenty of natural light, every moment in the kitchen feels like a joy. It’s not just a
-              kitchen—it’s where creativity thrives, memories are made, and connections happen. Come see why it’s the
-              centerpiece of life at Elsie Executive Apartments!</p>
-            <a href="#" class="home-btn">Read More <i class="bi bi-box-arrow-in-up-right"></i></a>
-          </div>
-        </div>
-        <div class="slide " id="slide3">
-          <div class="image-container">
-            <img src="res/img/house.jpg" alt="Spacious Rooms">
-          </div>
-          <div class="text-box">
-            <h2>Spacious Rooms</h2>
-            <p>Say goodbye to parking headaches at Elsie Executive Apartments! Here, convenience meets peace of mind
-              with our secure, spacious, and well-maintained parking facilities. Whether you drive a car or a
-              motorcycle, there’s always room for your ride—just steps from your front door. With 24/7 safety
-              monitoring, you can relax knowing your vehicle is in good hands. At Elsie Executive Apartments, parking
-              isn’t just practical—it’s effortless. Because here, we don’t just take care of your home; we take care
-              of everything that matters to you. Drive in, park easy, and live stress-free!</p>
-            <a href="#" class="home-btn">Read More <i class="bi bi-box-arrow-in-up-right"></i></a>
-          </div>
-        </div>
-        <!-- Additional slides... -->
+    <nav class="navbar">
+      <div class="navbar-header">
+        <button class="navbar-toggler" data-toggle="open-navbar1">
+          <i class="bi bi-list" id="Nav-list"></i>
+        </button>
+        <a href="#home">
+          <h2><span>Elsie</span>Executive</h2>
+        </a>
       </div>
-      <!-- Navigation arrows -->
-      <i class="bi bi-chevron-left" id="prevBtn"></i>
-      <i class="bi bi-chevron-right" id="nextBtn"></i>
-    </div>
+
+      <div class="navbar-menu" id="open-navbar1">
+        <ul class="navbar-nav">
+          <li class="active"><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#houses">Houses</a></li>
+          <li><a href="#">Contact</a></li>
+          <li class="navbar-dropdown">
+            <a href="#" class="dropdown-toggler" data-dropdown="my-dropdown-id">
+              Sign in as <i class="bi bi-chevron-down"></i>
+            </a>
+
+            <ul class="dropdown" id="my-dropdown-id">
+              <li>
+                <a href="log-in.php">Administrator </a>
+              </li>
+              <li class="separator"></li>
+              <li>
+                <a href="login.php">Tenant </a>
+              </li>
+              <li class="separator"></li>
+              <li>
+                <a href="login.php">Manager</a>
+              </li>
+            </ul>
+          </li>
+          <li><a href="Register.php">Register</a></li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <section id="home" class="home-section">
+      <div class="home-container">
+          <div class="slider-container">
+              <!-- Slide 1 -->
+              <div class="slide active" id="slide1">
+                  <div class="image-container">
+                      <img src="res/img/Space.jpg" alt="Spacious Rooms">
+                  </div>
+                  <div class="text-box">
+                      <h2>Welcome to Elsie</h2>
+                      <p>Discover the ultimate in comfort and style with our spacious rooms at Elsie Executive Apartments! I love how every room is designed with plenty of space to breathe, relax, and truly make it my own. The large windows flood the space with natural light, creating a bright and airy vibe that feels so inviting. With sleek finishes, modern touches, and layouts that perfectly blend style and functionality, these rooms are everything I need for relaxing evenings or hosting friends. Come see for yourself why Elsie Executive Apartments isn’t just a place to live—it’s a place to thrive!</p>
+                      <a href="#" class="home-btn">Read More <i class="bi bi-box-arrow-in-up-right"></i></a>
+                  </div>
+              </div>
+              <div class="slide " id="slide2">
+                <div class="image-container">
+                    <img src="res/img/parking-2.png" alt="Spacious Rooms">
+                </div>
+                <div class="text-box">
+                    <h2>Spacious Rooms</h2>
+                    <p>Step into the heart of Elsie Executive Apartments and experience the magic of our open kitchen design! I absolutely love how it perfectly blends modern style with practical functionality, giving me the ideal space for all my culinary adventures. The spacious layout flows effortlessly into the living area, creating a warm and inviting vibe that’s perfect for socializing. With sleek countertops, premium appliances, and plenty of natural light, every moment in the kitchen feels like a joy. It’s not just a kitchen—it’s where creativity thrives, memories are made, and connections happen. Come see why it’s the centerpiece of life at Elsie Executive Apartments!</p>
+                    <a href="#" class="home-btn">Read More <i class="bi bi-box-arrow-in-up-right"></i></a>
+                </div>
+            </div>
+            <div class="slide " id="slide3">
+              <div class="image-container">
+                  <img src="res/img/house.jpg" alt="Spacious Rooms">
+              </div>
+              <div class="text-box">
+                  <h2>Spacious Rooms</h2>
+                  <p>Say goodbye to parking headaches at Elsie Executive Apartments! Here, convenience meets peace of mind with our secure, spacious, and well-maintained parking facilities. Whether you drive a car or a motorcycle, there’s always room for your ride—just steps from your front door. With 24/7 safety monitoring, you can relax knowing your vehicle is in good hands. At Elsie Executive Apartments, parking isn’t just practical—it’s effortless. Because here, we don’t just take care of your home; we take care of everything that matters to you. Drive in, park easy, and live stress-free!</p>
+                  <a href="#" class="home-btn">Read More <i class="bi bi-box-arrow-in-up-right"></i></a>
+              </div>
+          </div>
+              <!-- Additional slides... -->
+          </div>
+          <!-- Navigation arrows -->
+          <i class="bi bi-chevron-left" id="prevBtn"></i>
+          <i class="bi bi-chevron-right" id="nextBtn"></i>
+      </div>
   </section>
+  
 
-
-  <section id="about" class="about-section">
-    <div class="about-container">
-      <h2>About Elsie Executive Apartments</h2>
-      <div class="about-content">
-        <div class="about-text">
-          <p>
-            Welcome to Elsie Executive Apartments, located in the heart of Kitengela. Our apartments are designed to
-            provide a luxurious and comfortable living experience for both short and long-term stays. With modern
-            amenities and stylish decor, we ensure that our guests feel right at home.
-
-            At Elsie Executive Apartments, we pride ourselves on our exceptional service and attention to detail.
-            Whether you are here for business or leisure, our dedicated staff is always available to assist you with
-            your needs, ensuring a pleasant and memorable stay.
-
-            Experience the perfect blend of comfort, convenience, and style at Elsie Executive Apartments. We look
-            forward to welcoming you!
-          </p>
+    <section id="about" class="about-section">
+      <div class="about-container">
+        <h2>About Elsie Executive Apartments</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              Welcome to Elsie Executive Apartments, located in the heart of Kitengela. Our apartments are designed to
+              provide a luxurious and comfortable living experience for both short and long-term stays. With modern
+              amenities and stylish decor, we ensure that our guests feel right at home.
+            </p>
+            <p>
+              At Elsie Executive Apartments, we pride ourselves on our exceptional service and attention to detail.
+              Whether you are here for business or leisure, our dedicated staff is always available to assist you with
+              your needs, ensuring a pleasant and memorable stay.
+            </p>
+            <p>
+              Experience the perfect blend of comfort, convenience, and style at Elsie Executive Apartments. We look
+              forward to welcoming you!
+            </p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Back to Top Button -->
-    <i class="bi bi-chevron-up" id="btn-back-to-top"></i>
+      <!-- Back to Top Button -->
+      <i class="bi bi-chevron-up" id="btn-back-to-top"></i>
 
-    <script>
-      window.onscroll = function () {
-        const backToTopButton = document.getElementById('btn-back-to-top');
-        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-          backToTopButton.style.display = 'block';
-        } else {
-          backToTopButton.style.display = 'none';
-        }
-      };
-
-      document.getElementById('btn-back-to-top').addEventListener('click', function (event) {
-        event.preventDefault();
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
-    </script>
-
-  </section>
-
-  <section>
-    <footer class="footer">
-
-      <div class="footer-container">
-        <!-- Company Column -->
-        <div class="footer-column">
-          <h2>Company</h2>
-          <ul>
-            <li><a href="#About">About Us</a></li>
-            <li><a href="#">Career Opportunities</a></li>
-            <li><a href="#Contact">Contact Us</a></li>
-            <li><a href="#">Testimonials</a></li>
-            <li><a href="#">Our Partners</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-
-          </ul>
-        </div>
-
-        <!-- Products Column -->
-        <div class="footer-column">
-          <h2>Products</h2>
-          <ul>
-            <li><a href="#">Elite Trainers</a></li>
-            <li><a href="#">Boxing Events</a></li>
-            <li><a href="#">Training Facilities</a></li>
-            <li><a href="#">Training Packages</a></li>
-            <li><a href="#">Pro Boxing Equipment</a></li>
-            <li><a href="#">Performance Supplements</a></li>
-          </ul>
-        </div>
-
-        <!-- Resources Column -->
-        <div class="footer-column">
-          <h2>Resources</h2>
-          <ul>
-            <li><a href="#">Training Guides</a></li>
-            <li><a href="#">Nutrition Plans</a></li>
-            <li><a href="#">Recovery Techniques</a></li>
-            <li><a href="#">Injury Prevention</a></li>
-            <li><a href="#">Boxing Technique Videos</a></li>
-            <li><a href="#">Workout Tracking</a></li>
-          </ul>
-        </div>
-
-        <!-- Social Column -->
-        <div class="footer-column">
-          <h2>Social</h2>
-          <ul>
-            <li><a href="" class="flex"><i class="bi bi-github"> Github</i></li>
-            <li><a href="https://linkedin.com/in/maithya" class="flex"><i class="bi bi-linkedin">
-                  Linkedin</i> </li>
-            <li><a href="https://x.com/Maithy_a" class="flex"><i class="bi bi-twitter-x"> Twitter</i></li>
-            <li><a href="https://instagram.com/_b0nni3._._" class="flex"><i class="bi bi-instagram">
-                  Instagram</i></li>
-          </ul>
-        </div>
-
-      </div>
-    </footer>
-
-    <!-- Footer Bottom -->
-    <div class="bottom">
-      <span> <span id="currentYear"></span></span>
       <script>
-        document.getElementById("currentYear").textContent = new Date().getFullYear();
-      </script> ElsieAppartments All Rights Reserved
-    </div>
+        window.onscroll = function () {
+          const backToTopButton = document.getElementById('btn-back-to-top');
+          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            backToTopButton.style.display = 'block';
+          } else {
+            backToTopButton.style.display = 'none';
+          }
+        };
 
-  </section>
+        document.getElementById('btn-back-to-top').addEventListener('click', function (event) {
+          event.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      </script>
+
+    </section>
+
+    <footer class="footer">
+      <div class="waves">
+        <div class="wave" id="wave1"></div>
+        <div class="wave" id="wave2"></div>
+        <div class="wave" id="wave3"></div>
+        <div class="wave" id="wave4"></div>
+      </div>
+
+      <ul class="social-icon">
+        <li class="social-icon__item"><a class="social-icon__link" href="https://www.instagram.com/_b0nni3._._/"
+            target="_blank">
+            <i class="bi bi-instagram"></i>
+          </a>
+        </li>
+
+        <li class="social-icon__item"><a class="social-icon__link" href="#">
+            <i class="bi bi-twitter-x"></i>
+          </a>
+        </li>
+
+        <li class="social-icon__item"><a class="social-icon__link" href="" target="_blank">
+            <i class="bi bi-linkedin"></i>
+          </a>
+        </li>
+
+        <li class="social-icon__item"><a class="social-icon__link" href="" target="_blank">
+            <i class="bi bi-dribbble"></i>
+          </a>
+        </li>
+
+        <li class="social-icon__item"><a class="social-icon__link" href="" target="_blank">
+            <i class="bi bi-github"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="menu">
+        <li class="menu__item"><a class="menu__link" href="#">Home</a></li>
+        <li class="menu__item"><a class="menu__link" href="#about">About</a></li>
+        <li class="menu__item"><a class="menu__link" href="#">Services</a></li>
+        <li class="menu__item"><a class="menu__link" href="#">Blog</a></li>
+        <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
+      </ul>
+
+      <p>
+        <span><i class="bi bi-c-circle"></i> CopyRight, ElsieExecutive. All Rights Reserved
+          <span id="currentYear"></span></span>
+        <script>
+          document.getElementById("currentYear").textContent = new Date().getFullYear();
+        </script>
+      </p>
+    </footer>
+  </div>
 
   <script src="res/js/index.js" defer></script>
 

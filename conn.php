@@ -1,14 +1,9 @@
 <?php
-$host = "sql10.freesqldatabase.com";
-$username = "sql10751931";
-$password = "TUxULKYXl5";
-$database = "sql10751931";
+// Ensure you're using mysqli
+$con = mysqli_connect("sql8.freemysqlhosting.net", "sql8751494", "w51IMewpGY", "sql8751494");
 
-$con = mysqli_connect($host, $username, $password, $database);
-
+// Check connection
 if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
-} else {
-    echo "DBConnected.";
 }
 ?>
