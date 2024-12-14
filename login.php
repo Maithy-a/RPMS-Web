@@ -129,7 +129,7 @@ if (isset($_POST["login"])) {
                             <div class="row">
                                 <div class="col-lg-6 d-none d-lg-block">
                                     <img src="res/img/house.jpg" alt="Rental House" width="500" height="530"
-                                        style="opacity;">
+                                        style="opacity:1;">
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="p-5">
@@ -181,8 +181,8 @@ if (isset($_POST["login"])) {
         <script src="https://cdn.jsdelivr.net/npm/sb-admin-2@latest/js/sb-admin-2.min.js"></script>
 
         <script>
-            window.addEventListener('load', function () {
-                setTimeout(function () {
+            window.addEventListener('load', function() {
+                setTimeout(function() {
                     document.querySelector('.loader').style.display = 'none';
                     document.querySelector('.blurred-content').style.filter = 'none';
                 }, 2000);
