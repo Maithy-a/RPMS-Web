@@ -2,7 +2,7 @@
 session_start();
 include "../conn.php";
 if (!$_SESSION['username']) {
-  echo '<script>window.location.href = "../index.php";</script>';
+  echo '<script>window.location.href = "../index.html";</script>';
   exit();
 }
 ?>

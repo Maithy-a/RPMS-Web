@@ -552,7 +552,7 @@ if (isset($_POST["submit"])) {
                 <a class="small" href="login.php">Already have an account? Login!</a>
               </div>
               <div class="text-center">
-                <a class="small" href="index.php">Back Home</a>
+                <a class="small" href="index.html">Back Home</a>
               </div>
             </div>
           </div>

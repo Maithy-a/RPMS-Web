@@ -54,35 +54,52 @@ function handleSmallScreens() {
 handleSmallScreens();
 
 //curosell
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const totalSlides = slides.length;
-let slideInterval;
+document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelectorAll('.slide');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let currentSlide = 0;
+  let autoSlideInterval;
 
-const showSlide = (n) => {
-  slides[currentSlide].classList.remove('active');
-  currentSlide = (n + totalSlides) % totalSlides;
-  slides[currentSlide].classList.add('active');
-}
+  function updateSlides() {
+    slides.forEach((slide) => {
+      slide.classList.remove('active');
+    });
+    slides[currentSlide].classList.add('active');
+  }
 
-const nextSlide = () => showSlide(currentSlide + 1);
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateSlides();
+  }
 
-const prevSlide = () => showSlide(currentSlide - 1);
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    updateSlides();
+  }
 
-const startSlideShow = () => slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+  function startAutoSlide() {
+    
+    autoSlideInterval = setInterval(nextSlide, 8000);
+  }
 
-const stopSlideShow = () => clearInterval(slideInterval);
+  function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+  }
 
-document.getElementById('prevBtn').addEventListener('click', prevSlide);
-document.getElementById('nextBtn').addEventListener('click', nextSlide);
+  prevBtn.addEventListener('click', () => {
+    stopAutoSlide();
+    prevSlide();
+    startAutoSlide();
+  });
 
-// Pause the slideshow when the mouse is over the slider
-document.querySelector('.slider-container').addEventListener('mouseenter', stopSlideShow);
+  nextBtn.addEventListener('click', () => {
+    stopAutoSlide();
+    nextSlide();
+    startAutoSlide();
+  });
 
-// Restart the slide show when the mouse leaves the slider
-document.querySelector('.slider-container').addEventListener('mouseleave', startSlideShow);
-
-// Show the first slide and start the slide show when the page loads
-showSlide(currentSlide);
-startSlideShow();
-
+  // Initialize the first slide and start auto-sliding
+  updateSlides();
+  startAutoSlide();
+});
