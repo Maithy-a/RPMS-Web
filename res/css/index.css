@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
+:root {
+  --primary-color: #3586ff; 
+  --text-color:#fff; 
+  --gray-text:#3c4250;
+  --font-size: 16px; 
+}
 * {
   box-sizing: border-box;
   padding: 0;
@@ -8,7 +13,7 @@
 
 body {
   font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
+  font-size: var(--font-size);
   display: grid;
   grid-template-rows: auto 1fr auto;
   scroll-behavior: smooth;
@@ -17,6 +22,7 @@ body {
 a {
   text-decoration: none;
 }
+
 /* -------------------------------------------------------------------------- */
 /* NAVBAR */
 /* -------------------------------------------------------------------------- */
@@ -27,24 +33,20 @@ a {
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  background-color: #fff;
+  background-color: var(--text-color);
   padding: 1rem 1.15rem;
-  border-bottom: 1px solid #eceef3;
-  position: fixed; /* Ensure the navbar stays fixed at the top */
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1050;
 }
 
-body {
-  margin: 0; /* Remove default body margin to ensure navbar touches the top */
-  padding-top: 56px; /* Add padding to avoid content overlapping with fixed navbar */
-}
 
 @media (max-width: 768px) {
   .navbar {
     display: block;
-    padding: 0.75rem 1rem; /* Adjust padding for smaller screens */
+    padding: 0.75rem 1rem;
+    
   }
 }
 
@@ -79,12 +81,12 @@ body {
 
 .navbar-header .navbar-toggler i {
   font-size: 1.5rem;
-  color: #3c4250;
+  color: var(--gray-text);
 }
 
-.navbar-header > a {
+.navbar-header>a {
   font-weight: 500;
-  color: #3c4250;
+  color: var(--gray-text);
   text-decoration: none;
 }
 
@@ -124,28 +126,28 @@ body {
   }
 }
 
-.navbar-menu .navbar-nav > li > a {
-  color: #3c4250;
+.navbar-menu .navbar-nav>li>a {
+  color: var(--gray-text);
   text-decoration: none;
   display: inline-block;
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
 }
 
-.navbar-menu .navbar-nav > li > a:hover {
-  color: #3586ff;
+.navbar-menu .navbar-nav>li>a:hover {
+  color: var(--primary-color);
   text-decoration: underline;
   text-underline-offset: 10px;
 }
 
 @media (max-width: 768px) {
-  .navbar-menu .navbar-nav > li > a {
+  .navbar-menu .navbar-nav>li>a {
     border-bottom: 1px solid #eceef3;
   }
 }
 
-.navbar-menu .navbar-nav > li.active a {
-  color: #3586ff;
+.navbar-menu .navbar-nav>li.active a {
+  color: var(--primary-color);
 }
 
 .navbar-menu .navbar-nav .navbar-dropdown .dropdown {
@@ -153,7 +155,7 @@ body {
   position: absolute;
   top: 150%;
   left: 0;
-  background-color: #fff;
+  background-color: var(--text-color);
   padding: 0.5rem 0;
   min-width: 160px;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
@@ -170,7 +172,7 @@ body {
 }
 
 .navbar-menu .navbar-nav .navbar-dropdown .dropdown li a {
-  color: #3c4250;
+  color: var(--gray-text);
   padding: 0.25rem 1rem;
   display: block;
 }
@@ -179,7 +181,7 @@ body {
   display: block !important;
 }
 
-.navbar-menu .navbar-nav .dropdown > .separator {
+.navbar-menu .navbar-nav .dropdown>.separator {
   height: 1px;
   width: 100%;
   margin: 9px 0;
@@ -190,8 +192,8 @@ body {
   position: relative;
 }
 
-.navbar .navbar-header > a span {
-  color: #3586ff;
+.navbar .navbar-header>a span {
+  color: var(--primary-color);
 }
 
 .navbar .navbar-header h2 {
@@ -202,66 +204,67 @@ body {
 }
 
 .navbar-menu .navbar-nav .navbar-dropdown .dropdown li a:hover {
-  color: #3586ff;
+  color: var(--primary-color);
   text-decoration: underline;
   text-underline-offset: 5px;
 }
 
+/* -------------------------------------------------------------------------- */
+/* Home section */
+/* -------------------------------------------------------------------------- */
 
 .home-section {
-  background-color: #fdf0d5;
-  width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
+  background-color: #f8f9fa;
+  padding: 0;
+  padding-top: 60px;
 }
 
 .home-container {
   width: 100%;
-  height: 100%;
+  margin: 0 auto;
+  position: relative;
 }
 
-/* Slider container */
+/* Styles for the slider container */
 .slider-container {
   position: relative;
   overflow: hidden;
-  width: 100%;
-  height: 100vh;
-  max-height: 900px;
-  margin: auto;
 }
 
-/* Slides */
+/* Individual slide styles */
 .slide {
   display: none;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 1s ease, visibility 1s ease;
+  height: 575px;
 }
 
-
-/* Active slide */
+/* Active slide visibility */
 .slide.active {
   display: flex;
-  opacity: 1;
-  visibility: visible;
 }
 
-/* Image Container */
-.image-container {
-  flex: 7;
-  height: 100%;
-  width: 50%;
-  overflow: hidden;
+/* Text box styling */
+.text-box {
+  flex: 1;
+  padding: 20px;
+  background-color: #4361ee;
+  color: var(--text-color);
+  text-align: left;
+  justify-content: center;
+  
 }
-/* Image */
+.text-box h2{
+  font-size: 2rem;
+}
+.text-box p{
+  line-height: 1.4rem;
+}
+
+/* Image container styling */
+.image-container {
+  flex: 1;
+}
+
 .image-container img {
   width: 100%;
   height: 100%;
@@ -269,85 +272,23 @@ body {
   object-position: center;
 }
 
-/* Text box */
-.text-box {
-  flex: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 4em;
-  color: #fff;
-  box-sizing: border-box;
-  line-height: 1.5rem;
-  min-width: 50%;
-  max-width: 50%;
-  overflow-y: auto;
-  max-height: 100%;
-}
-
-/* Scrollbar for text box */
-.text-box::-webkit-scrollbar {
-  width: 8px;
-}
-
-.text-box::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.text-box::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-}
-
-/* Headings and paragraphs */
-.text-box h2 {
-  font-size: 2rem;
-  margin-bottom: 1.4rem;
-}
-
-.text-box p {
-  line-height: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-/* Buttons */
-.home-btn {
-  background-color: transparent;
-  border: 1px solid white;
-  color: white;
-  padding: 10px 20px;
-  font-size: 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 20px 0;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.home-btn:hover {
-  background-color: white;
-  color: #0767b2;
-}
-
-/* Navigation buttons */
-#prevBtn, #nextBtn {
+/* Navigation arrows styling */
+.bi-chevron-left,
+.bi-chevron-right {
   position: absolute;
   top: 50%;
-  z-index: 10;
-  font-size: 27px;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  cursor: pointer;
   transform: translateY(-50%);
-  transition: background-color 0.3s ease, transform 0.4s ease;
+  font-size: 2rem;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 5px;
+  background-color: #4950579c;
+  transition: all 2s ease;
 }
-
-#prevBtn:hover, #nextBtn:hover {
-  background-color: #ffffffcc;
-  color: #001d3d;
-}
+#prevBtn:hover, #nextBtn:hover{
+  background-color: rgba(255, 255, 255, 0.521);
+  color: var(--primary-color);
+} 
 
 #prevBtn {
   left: 10px;
@@ -357,57 +298,35 @@ body {
   right: 10px;
 }
 
-/* Background colors for each slide */
-#slide1, #slide2, #slide3 {
-  background-color: #0767b2;
-  transition: all 3s;
+.home-btn {
+  padding: 20px;
+  color: var(--text-color);
+  transition: color 2s ease;
 }
 
-/* Tablet and Mobile Responsive Design */
-@media screen and (max-width: 1024px) {
-  .slider-container {
-    height: auto;
-    min-height: 100vh;
-  }
+.home-btn:hover {
+  color: #555;
+}
 
+/* (tablets and phones) */
+@media (max-width: 768px) {
   .slide {
     flex-direction: column;
     height: auto;
-    min-height: 100vh;
   }
 
-  .text-box, .image-container {
-    max-width: 100%;
-    min-width: 100%;
-    height: 50vh;
-  }
-
-  .text-box {
-    order: 2;
-    padding: 2em;
-    justify-content: flex-start;
-  }
-
+  .text-box,
   .image-container {
-    order: 1;
-    max-height: 50vh;
+    width: 100%;
+    flex-basis: auto;
+    display: block;
+  }
+
+  .image-container img {
+    height: 240px
   }
 }
 
-/* Small Mobile Devices */
-@media screen and (max-width: 480px) {
-  .text-box, .image-container {
-    padding: 1em;
-  }
-
-  .text-box h2 {
-    font-size: 1.5rem;
-  }
-
-  .text-box p {
-    font-size: 0.9rem;
-  }
-}
 
 /* -------------------------------------------------------------------------- */
 /* About Section Styles */
@@ -422,7 +341,7 @@ body {
 .about-section h2 {
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #3c4250;
+  color: var(--gray-text);
 }
 
 .about-text {
@@ -460,8 +379,8 @@ body {
   z-index: 9999;
   right: 20px;
   bottom: 20px;
-  border: 1px solid white;
-  color: white;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
   transition: opacity 0.4s ease, transform 0.3s ease;
 }
 
@@ -475,7 +394,7 @@ body {
 .footer {
   position: relative;
   width: 100%;
-  background: #3586ff;
+  background: var(--primary-color);
   min-height: 100px;
   padding: 20px 50px;
   display: flex;
@@ -501,7 +420,7 @@ body {
 
 .social-icon__link {
   font-size: 2rem;
-  color: #fff;
+  color: var(--text-color);
   margin: 0 10px;
   display: inline-block;
   transition: 0.5s;
@@ -513,7 +432,7 @@ body {
 
 .menu__link {
   font-size: 1rem;
-  color: #fff;
+  color: var(--text-color);
   margin: 0 10px;
   display: inline-block;
   transition: 0.5s;
@@ -527,7 +446,7 @@ body {
 }
 
 .footer p {
-  color: #fff;
+  color: var(--text-color);
   margin: 15px 0 10px 0;
   font-size: 1rem;
   font-weight: 250;
