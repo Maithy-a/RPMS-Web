@@ -181,8 +181,8 @@ if (isset($_POST["login"])) {
         <script src="https://cdn.jsdelivr.net/npm/sb-admin-2@latest/js/sb-admin-2.min.js"></script>
 
         <script>
-            window.addEventListener('load', function () {
-                setTimeout(function () {
+            window.addEventListener('load', function() {
+                setTimeout(function() {
                     document.querySelector('.loader').style.display = 'none';
                     document.querySelector('.blurred-content').style.filter = 'none';
                 }, 2000);
