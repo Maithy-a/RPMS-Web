@@ -54,29 +54,52 @@ function handleSmallScreens() {
 handleSmallScreens();
 
 //curosell
-const slides = document.querySelectorAll('.slide');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-let currentSlide = 0;
+document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelectorAll('.slide');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let currentSlide = 0;
+  let autoSlideInterval;
 
-function updateSlides() {
-  slides.forEach((slide, index) => {
-    slide.classList.remove('active'); // Remove active class from all slides
+  function updateSlides() {
+    slides.forEach((slide) => {
+      slide.classList.remove('active');
+    });
+    slides[currentSlide].classList.add('active');
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateSlides();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    updateSlides();
+  }
+
+  function startAutoSlide() {
+    
+    autoSlideInterval = setInterval(nextSlide, 8000);
+  }
+
+  function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+  }
+
+  prevBtn.addEventListener('click', () => {
+    stopAutoSlide();
+    prevSlide();
+    startAutoSlide();
   });
-  slides[currentSlide].classList.add('active'); // Add active class to the current slide
-}
 
-prevBtn.addEventListener('click', () => {
-  currentSlide = (currentSlide - 1 + slides.length) % slides.length; // Loop back if at the first slide
+  nextBtn.addEventListener('click', () => {
+    stopAutoSlide();
+    nextSlide();
+    startAutoSlide();
+  });
+
+  // Initialize the first slide and start auto-sliding
   updateSlides();
+  startAutoSlide();
 });
-
-nextBtn.addEventListener('click', () => {
-  currentSlide = (currentSlide + 1) % slides.length; // Loop to the first slide if at the last
-  updateSlides();
-});
-
-// Initialize the first slide
-updateSlides();
-
-

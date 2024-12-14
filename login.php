@@ -160,7 +160,7 @@ if (isset($_POST["login"])) {
                                         </div>
 
                                         <div class="text-center">
-                                            <a class="small" href="index.php">Back Home</a>
+                                            <a class="small" href="index.html">Back Home</a>
                                         </div>
                                     </div>
                                 </div>

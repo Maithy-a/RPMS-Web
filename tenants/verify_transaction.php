@@ -2,7 +2,7 @@
 session_start();
 include "../conn.php";
 if (!$_SESSION['username']) {
-  echo '<script>window.location.href = "../index.php";</script>';
+  echo '<script>window.location.href = "../index.html";</script>';
   exit();
 }
 ?>
@@ -230,7 +230,7 @@ if (!$_SESSION['username']) {
               if (isset($_GET['reference'])) {
                 $referenceId = $_GET['reference'];
                 if ($referenceId == '') {
-                  header("Location: index.php");
+                  header("Location: index.html");
                 } else {
                   $curl = curl_init();
                   curl_setopt_array($curl, array(
@@ -275,7 +275,7 @@ if (!$_SESSION['username']) {
                   }
                 }
               } else {
-                header("Location: index.php");
+                header("Location: index.html");
               }
               ?>
               <a href="paystack.php" class="btn btn-primary">Go Back</a>
