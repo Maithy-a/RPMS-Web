@@ -51,9 +51,7 @@ if (!$_SESSION['username']) {
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fa-solid fa-face-laugh-wink fa-beat-fade" href="home.php"></i>
-        </div>
+        
         <div class="sidebar-brand-text mx-3">Elsie Rental Management System<sup>Ex</sup></div>
       </a>
 

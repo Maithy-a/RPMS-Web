@@ -44,7 +44,6 @@ if ($_SESSION['username'] != "ADMIN") {
   <style>
     .chart-area {
       height: 400px;
-      /* Adjust height as needed */
     }
   </style>
 </head>
@@ -59,9 +58,7 @@ if ($_SESSION['username'] != "ADMIN") {
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin_home.php">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fa-solid fa-face-laugh-wink fa-beat-fade" href="admin_home.php"></i>
-        </div>
+        
         <div class="sidebar-brand-text mx-3">Elsie Rental Management System<sup>Ex</sup></div>
       </a>
 

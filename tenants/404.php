@@ -206,20 +206,20 @@ if (!$_SESSION['username']) {
                 aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php
 
-                $uname = $_SESSION['username'];
+                                                                          $uname = $_SESSION['username'];
 
-                $query = "SELECT * FROM tenant WHERE u_name = '$uname' ";
-                $result = mysqli_query($con, $query);
-                $row = mysqli_fetch_assoc($result);
-                do {
-                  $fname = $row['fname'];
-                  $lname = $row['lname'];
-                  $full = $fname . " " . $lname;
-                  echo $full;
-                  $row = mysqli_fetch_assoc($result);
-                } while ($row);
+                                                                          $query = "SELECT * FROM tenant WHERE u_name = '$uname' ";
+                                                                          $result = mysqli_query($con, $query);
+                                                                          $row = mysqli_fetch_assoc($result);
+                                                                          do {
+                                                                            $fname = $row['fname'];
+                                                                            $lname = $row['lname'];
+                                                                            $full = $fname . " " . $lname;
+                                                                            echo $full;
+                                                                            $row = mysqli_fetch_assoc($result);
+                                                                          } while ($row);
 
-                ?></span>
+                                                                          ?></span>
                 <img class="img-profile rounded-circle" src="../res/img/user.png">
               </a>
 
