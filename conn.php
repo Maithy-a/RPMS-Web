@@ -1,14 +1,22 @@
 <?php
-$host = "sql10.freesqldatabase.com";
-$username = "sql10751931";
-$password = "TUxULKYXl5";
-$database = "sql10751931";
+$host = "localhost";
+$port = 3306;
+$user = "root";
+$password = "#tHinkpad8700";  
+$dbname = "elsie_db";
 
-$con = mysqli_connect($host, $username, $password, $database);
+$con = new mysqli($host, $user, $password, $dbname, $port);
 
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
+// Check connection
+$message = "";
+$toastClass = "";
+if ($con->connect_errno) {
+    $message = "Connection failed: " . $con->connect_error;
+    $toastBgColor = "#FF4C4C";
+    $toastTextColor = "#FFFFFF"; 
 } else {
-    echo "DBConnected.";
+    $message = "Connection established";
+    $toastBgColor = "#28A745"; 
+    $toastTextColor = "#FFFFFF"; 
 }
 ?>

@@ -106,12 +106,17 @@ if (isset($_POST["login"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Elsie Rental Management System</title>
-    <link rel="icon" href="res/img/office.png">
-    <link rel="stylesheet" href="res/css/loader.css">
+    <title>Elsie Executive.</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="res/img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="res/img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="res/img/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="res/img/favicon_io/site.webmanifest">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/css/sb-admin-2.min.css"
         rel="stylesheet">
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -122,6 +127,26 @@ if (isset($_POST["login"])) {
     <div class="blurred-content">
 
         <div class="container">
+            <!-- Toast Notification -->
+            <div class="toast-container">
+                <div class="custom-toast" role="alert" aria-live="assertive" aria-atomic="true" style="background-color: <?php echo $toastBgColor; ?>; color: <?php echo $toastTextColor; ?>;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="toast-body">
+                            <?php echo $message; ?>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close" style="color: <?php echo $toastTextColor; ?>;"></button>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // Automatically hide the toast after 3 seconds
+                setTimeout(() => {
+                    const toast = document.querySelector('.custom-toast');
+                    if (toast) toast.style.display = 'none';
+                }, 3000);
+            </script>
+
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-12 col-md-9">
                     <div class="card o-hidden border-0 shadow-lg my-5">
@@ -169,7 +194,9 @@ if (isset($_POST["login"])) {
                     </div>
                 </div>
             </div>
+
         </div>
+
         <script>
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
@@ -179,7 +206,8 @@ if (isset($_POST["login"])) {
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sb-admin-2@latest/js/sb-admin-2.min.js"></script>
-
+        <!-- Include Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
         <script>
             window.addEventListener('load', function() {
                 setTimeout(function() {

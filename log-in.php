@@ -106,16 +106,20 @@ if (isset($_POST["login"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Elsie Rental Management System</title>
-    <link rel="icon" href="res/img/office.png">
-    <link rel="stylesheet" href="res/css/loader.css">
+    <title>Elsie Executive.</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="res/img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="res/img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="res/img/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="res/img/favicon_io/site.webmanifest">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/css/sb-admin-2.min.css"
         rel="stylesheet">
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-
     <div class="loader">
         <div></div>
         <div></div>
@@ -130,7 +134,7 @@ if (isset($_POST["login"])) {
                             <div class="row">
                                 <div class="col-lg-6 d-none d-lg-block">
                                     <img src="res/img/house.jpg" alt="Rental House" width="500" height="530"
-                                        style="opacity;">
+                                        style="opacity:1;">
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="p-5">
@@ -170,25 +174,33 @@ if (isset($_POST["login"])) {
                     </div>
                 </div>
             </div>
+            <!-- Alert -->
+            <div class="alert <?php echo $alertType; ?> alert-dismissible fade show alert-position" role="alert">
+                <?php echo $message; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
         </div>
+
         <script>
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
             }
         </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sb-admin-2@latest/js/sb-admin-2.min.js"></script>
+        <!-- Include Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-            window.addEventListener('load', function () {
-                setTimeout(function () {
+            window.addEventListener('load', function() {
+                setTimeout(function() {
                     document.querySelector('.loader').style.display = 'none';
                     document.querySelector('.blurred-content').style.filter = 'none';
                 }, 2000);
             });
         </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sb-admin-2@latest/js/sb-admin-2.min.js"></script>
-
 </body>
 
 </html>
