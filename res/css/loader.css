@@ -6,12 +6,12 @@
     transform: translate(-50%, -50%);
     width: 64px;
     height: 64px;
-    z-index: 9999;
+    z-index: 1050;
   }
   
   .loader div {
     position: absolute;
-    border: 4px solid #3586ff;
+    border: 4px solid #ffffff;
     border-radius: 50%;
     animation: loader8435 1s ease-out infinite;
   }
@@ -38,12 +38,11 @@
     }
   }
   
-  /* Blurred effect for the main content */
   .blurred-content {
-    filter: blur(25px);
+    filter: blur(5px);
     transition: filter 0.5s ease;
   }
-  /* Hide loader after the page has loaded */
+
 .hidden {
   display: none;
 }
