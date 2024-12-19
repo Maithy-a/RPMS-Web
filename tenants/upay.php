@@ -204,7 +204,7 @@ if (!$_SESSION['username']) {
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php
+                <span class="mr-2 d-none d-lg-inline text-white small"><?php
 
                 $uname = $_SESSION['username'];
 
@@ -220,7 +220,7 @@ if (!$_SESSION['username']) {
                 } while ($row);
 
                 ?></span>
-                <img class="img-profile rounded-circle" src="../res/img/user.png">
+                <img class="img-profile rounded-circle" src="../res/img/undraw_pic-profile_nr49.svg">
               </a>
 
 
@@ -231,13 +231,15 @@ if (!$_SESSION['username']) {
                   Profile
                 </a>
                 <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
+                  <i class="bi bi-gear-wide"></i>
+Settings
+
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  <i class="bi bi-box-arrow-right"></i>
+Logout
+
                 </a>
               </div>
             </li>

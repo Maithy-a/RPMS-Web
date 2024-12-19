@@ -14,10 +14,13 @@
   <link rel="stylesheet" href="res/css/index.css">
   <link rel="stylesheet" href="res/css/loader.css">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   -->
   <!-- BOOTSTRAP ICONS CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+  <!-- 
+  <script src="//instant.page/5.2.0" type="module"
+    integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script> -->
 </head>
 
 <body>
@@ -79,7 +82,13 @@
             </div>
             <div class="text-box">
               <h2>Welcome to Elsie</h2>
-              <p>Welcome to Elsie Executive Apartments, where comfort and style come together to create the perfect living experience! From the moment you step in, you’ll feel the spaciousness and thoughtful design that make this more than just a place to stay—it’s a place to call home. With abundant natural light streaming through large windows, sleek modern finishes, and a seamless blend of functionality and elegance, our apartments are designed to inspire and delight. Whether you’re relaxing after a long day or hosting friends for a cozy evening, Elsie Executive Apartments offer the ideal setting to live, unwind, and thrive. Come and experience the difference for yourself!</p>
+              <p>Welcome to Elsie Executive Apartments, where comfort and style come together to create the perfect
+                living experience! From the moment you step in, you’ll feel the spaciousness and thoughtful design that
+                make this more than just a place to stay—it’s a place to call home. With abundant natural light
+                streaming through large windows, sleek modern finishes, and a seamless blend of functionality and
+                elegance, our apartments are designed to inspire and delight. Whether you’re relaxing after a long day
+                or hosting friends for a cozy evening, Elsie Executive Apartments offer the ideal setting to live,
+                unwind, and thrive. Come and experience the difference for yourself!</p>
               <a href="#" class="home-btn">Read More <i class="bi bi-box-arrow-in-up-right"></i></a>
             </div>
           </div>
@@ -151,7 +160,7 @@
       <i class="bi bi-chevron-up" id="btn-back-to-top"></i>
 
       <script>
-        window.onscroll = function() {
+        window.onscroll = function () {
           const backToTopButton = document.getElementById('btn-back-to-top');
           if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
             backToTopButton.style.display = 'block';
@@ -160,7 +169,7 @@
           }
         };
 
-        document.getElementById('btn-back-to-top').addEventListener('click', function(event) {
+        document.getElementById('btn-back-to-top').addEventListener('click', function (event) {
           event.preventDefault();
           window.scrollTo({
             top: 0,
@@ -220,7 +229,8 @@
               <li><a href="" class="flex"><i class="bi bi-github"></i> Github</a></li>
               <li><a href="https://linkedin.com/in/maithya" class="flex"><i class="bi bi-linkedin"></i> Linkedin</a></li>
               <li><a href="https://x.com/Maithy_a" class="flex"><i class="bi bi-twitter-x"></i> Twitter</a></li>
-              <li><a href="https://instagram.com/_b0nni3._._" class="flex"><i class="bi bi-instagram"></i> Instagram</a></li>
+              <li><a href="https://instagram.com/_b0nni3._._" class="flex"><i class="bi bi-instagram"></i> Instagram</a>
+              </li>
             </ul>
           </div>
 
@@ -252,9 +262,10 @@
     </section>
 
     <script src="res/js/index.js" defer></script>
+
     <script>
-      window.addEventListener('load', function() {
-        setTimeout(function() {
+      window.addEventListener('load', function () {
+        setTimeout(function () {
           document.querySelector('.loader').style.display = 'none';
           document.querySelector('.blurred-content').style.filter = 'none';
         }, 2000);

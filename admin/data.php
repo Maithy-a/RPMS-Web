@@ -1,21 +1,21 @@
 <?php
-$host = getenv('DB_HOST') ?: "sql8.freemysqlhosting.net";
-$username = getenv('DB_USER') ?: "sql8751494";
-$password = getenv('DB_PASS') ?: "w51IMewpGY";
-$dbname = getenv('DB_NAME') ?: "sql8751494";
+$host = getenv('DB_HOST') ?: "localhost";
+$port = getenv('DB_PORT') ?: "3306"; // Default port is 3306
+$username = getenv('DB_USER') ?: "root";
+$password = getenv('DB_PASS') ?: "#tHinkpad8700";
+$dbname = getenv('DB_NAME') ?: "elsie_db";
 
 try {
-    // Create a new PDO instance
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    // Create a new PDO instance with the port included
+    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
+
     // Query to get monthly payment totals
     $query = "SELECT DATE_FORMAT(date, '%Y-%m') AS month, SUM(amount) AS total 
               FROM payment 
               GROUP BY month";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
-    
+    $stmt = $pdo->query($query);
+
     // Fetch results
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -28,9 +28,14 @@ try {
     echo json_encode(['months' => $months, 'totals' => $totals]);
 
 } catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
+    // Log the error (example: error_log())
+    error_log("Database error: " . $e->getMessage());
+
+    // Send a generic error message to the client
+    http_response_code(500);
+    echo json_encode(['error' => 'Internal Server Error']);
 } finally {
-    // Optionally close the connection
+    // Close the connection
     $pdo = null;
 }
 ?>

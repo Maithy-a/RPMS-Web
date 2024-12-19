@@ -6,13 +6,15 @@
     .bottom {
       color: #797878;
       background-color: #F5F5F5;
+      border-top: 1px solid #e3e0e0;
       font-size: 1rem;
-      font-weight: 500;
+      font-weight: 100;
       padding: 20px;
       justify-content: space-between;
       align-items: center;
       text-align: center;
       bottom: 0;
+
     }
   </style>
 </head>

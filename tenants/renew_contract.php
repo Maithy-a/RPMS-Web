@@ -1,57 +1,6 @@
 <?php
 session_start();
-include('connection.php');
-
-if (!isset($_SESSION['user_id'])) {
-    echo '<script>window.location.href = "../login.php";</script>';
-    exit();
-}
-
-if (isset($_POST['renew'])) {
-    $contract_id = $_POST['contract_id'];
-    $tenant_id = $_POST['tenant_id'];
-    $house_id = $_POST['house_id'];
-    $duration_month = $_POST['duration_month'];
-    $total_rent = $_POST['total_rent'];
-    $terms = $_POST['terms'];
-    $rent_per_term = $_POST['rent_per_term'];
-    $start_day = $_POST['start_day'];
-    $end_day = $_POST['end_day'];
-
-    $sql = "INSERT INTO contract (tenant_id, house_id, duration_month, total_rent, terms, rent_per_term, start_day, end_day, date_contract_sign, status) VALUES ('$tenant_id', '$house_id', '$duration_month', '$total_rent', '$terms', '$rent_per_term', '$start_day', '$end_day', NOW(), 'Active')";
-
-    if ($conn->query($sql) === TRUE) {
-        $sql = "UPDATE contract SET status = 'Inactive' WHERE contract_id = '$contract_id'";
-        $conn->query($sql);
-        echo "<script>alert('Contract Renewed Successfully')</script>";
-    } else {
-        echo "<script>alert('Error Renewing Contract')</script>";
-    }
-}
-
-$sql = "SELECT * FROM contract WHERE status = 'Active' AND tenant_id = '" . $_SESSION['tenant_id'] . "'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $contract_id = $row['contract_id'];
-        $tenant_id = $row['tenant_id'];
-        $house_id = $row['house_id'];
-        $duration_month = $row['duration_month'];
-        $total_rent = $row['total_rent'];
-        $terms = $row['terms'];
-        $rent_per_term = $row['rent_per_term'];
-        $start_day = $row['start_day'];
-        $end_day = $row['end_day'];
-        $date_contract_sign = $row['date_contract_sign'];
-    }
-} else {
-    echo "<script>alert('No Active Contract Found')</script>";
-    echo '<script>window.location.href = "../login.php";</script>';
-    exit();
-}
-
-$conn->close();
+include('../conn.php');
 ?>
 
 <!DOCTYPE html>
@@ -65,6 +14,58 @@ $conn->close();
 </head>
 
 <body>
+    <?php
+    if (!isset($_SESSION['user_id'])) {
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
+    }
+
+    if (isset($_POST['renew'])) {
+        $contract_id = $_POST['contract_id'];
+        $tenant_id = $_POST['tenant_id'];
+        $house_id = $_POST['house_id'];
+        $duration_month = $_POST['duration_month'];
+        $total_rent = $_POST['total_rent'];
+        $terms = $_POST['terms'];
+        $rent_per_term = $_POST['rent_per_term'];
+        $start_day = $_POST['start_day'];
+        $end_day = $_POST['end_day'];
+
+        $sql = "INSERT INTO contract (tenant_id, house_id, duration_month, total_rent, terms, rent_per_term, start_day, end_day, date_contract_sign, status) VALUES ('$tenant_id', '$house_id', '$duration_month', '$total_rent', '$terms', '$rent_per_term', '$start_day', '$end_day', NOW(), 'Active')";
+
+        if ($conn->query($sql) === TRUE) {
+            $sql = "UPDATE contract SET status = 'Inactive' WHERE contract_id = '$contract_id'";
+            $conn->query($sql);
+            echo "<script>alert('Contract Renewed Successfully')</script>";
+        } else {
+            echo "<script>alert('Error Renewing Contract')</script>";
+        }
+    }
+
+    $sql = "SELECT * FROM contract WHERE status = 'Active' AND tenant_id = '" . $_SESSION['tenant_id'] . "'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $contract_id = $row['contract_id'];
+            $tenant_id = $row['tenant_id'];
+            $house_id = $row['house_id'];
+            $duration_month = $row['duration_month'];
+            $total_rent = $row['total_rent'];
+            $terms = $row['terms'];
+            $rent_per_term = $row['rent_per_term'];
+            $start_day = $row['start_day'];
+            $end_day = $row['end_day'];
+            $date_contract_sign = $row['date_contract_sign'];
+        }
+    } else {
+        echo "<script>alert('No Active Contract Found')</script>";
+        echo '<script>window.location.href = "../login.php";</script>';
+        exit();
+    }
+
+    $conn->close();
+    ?>
     <div class="container">
         <h2>Renew Contract</h2>
         <form method="post" action="">

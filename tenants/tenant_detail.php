@@ -135,7 +135,7 @@ if (!$_SESSION['username']) {
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true"
           aria-controls="collapseFive">
-          <i class="fas fa-dollar-sign fa-cog"></i>
+          <i class="bi bi-wallet2"></i>
           <span>Payment</span>
         </a>
         <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -245,14 +245,14 @@ if (!$_SESSION['username']) {
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php
+                <span class="mr-2 d-none d-lg-inline text-white small"><?php
 
                 include "../conn.php";
                 $uname = $_SESSION['username'];
-                echo "<b><b>" . $uname . "</b></b>";
+                echo $uname;
 
                 ?></span>
-                <img class="img-profile rounded-circle" src="../res/img/user.png">
+                <img class="img-profile rounded-circle" src="../res/img/undraw_pic-profile_nr49.svg">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -261,13 +261,15 @@ if (!$_SESSION['username']) {
                   Profile
                 </a>
                 <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
+                  <i class="bi bi-gear-wide"></i>
+Settings
+
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  <i class="bi bi-box-arrow-right"></i>
+Logout
+
                 </a>
 
             </li>

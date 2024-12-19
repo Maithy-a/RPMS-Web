@@ -173,7 +173,7 @@ function check($data){
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php
+                <span class="mr-2 d-none d-lg-inline text-white small"><?php
 
                 $uname = @$_SESSION['username'];
                 $query = "SELECT * FROM tenant WHERE u_name = '$uname' ";
@@ -188,7 +188,7 @@ function check($data){
                   $row = mysqli_fetch_assoc($result);
                 }while ($row);
                 ?></span>
-                <img class="img-profile rounded-circle" src="../res/img/user.png">
+                <img class="img-profile rounded-circle" src="../res/img/undraw_pic-profile_nr49.svg">
               </a>
              <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
