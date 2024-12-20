@@ -1,6 +1,8 @@
 <?php
 session_start();
 include "../conn.php";
+include "includes/head.php";
+
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = $_GET['id'];
@@ -21,9 +23,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $stmt->bind_param("i", $id);
 
         if ($stmt->execute()) {
-            // If the house was occupied, update contracts
             if ($stat == 'Occupied') {
-                echo "<script type='text/javascript'>alert('DELETED.');</script>";
+                echo "<script>toastr.success('House deleted successfully, and related contracts updated!');</script>";
                 echo '<script>window.location.href = "house_detail.php";</script>';
 
                 // Update related contracts
@@ -35,7 +36,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
                 while ($row1 = $result1->fetch_assoc()) {
                     $tid = $row1['tenant_id'];
-                    // Update each contract status to inactive
                     $sqlUpdate = "UPDATE contract SET status = 'Inactive' WHERE tenant_id = ?";
                     $stmtUpdate = $con->prepare($sqlUpdate);
                     $stmtUpdate->bind_param("i", $tid);
@@ -44,24 +44,23 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 }
                 $stmt1->close();
             } else {
-                echo "<script type='text/javascript'>alert('DELETED.');</script>";
+                echo "<script>toastr.success('House deleted successfully!', 'Success');</script>";
                 echo '<script>window.location.href = "house_detail.php";</script>';
             }
         } else {
-            echo "<script type='text/javascript'>alert('FAILED: " . htmlspecialchars(mysqli_error($con)) . ".');</script>";
+            echo "<script>toastr.error('Failed to delete house: " . htmlspecialchars(mysqli_error($con)) . "', 'Error' );</script>";
             echo '<script>window.location.href = "house_detail.php";</script>';
         }
     } else {
-        echo "<script type='text/javascript'>alert('House not found.');</script>";
+        echo "<script>toastr.error('House not found.', 'Error');</script>";
         echo '<script>window.location.href = "house_detail.php";</script>';
     }
 
-    // Close prepared statements
     $stmt->close();
 } else {
-    echo "<script type='text/javascript'>alert('Invalid ID.');</script>";
+    echo "<script>toastr.error('Invalid ID.', 'Error');</script>";
     echo '<script>window.location.href = "house_detail.php";</script>';
 }
 
-mysqli_close($con); // Close the connection
+mysqli_close($con);
 ?>

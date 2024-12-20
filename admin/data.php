@@ -1,9 +1,5 @@
 <?php
-$host = getenv('DB_HOST') ?: "localhost";
-$port = getenv('DB_PORT') ?: "3306"; // Default port is 3306
-$username = getenv('DB_USER') ?: "root";
-$password = getenv('DB_PASS') ?: "#tHinkpad8700";
-$dbname = getenv('DB_NAME') ?: "elsie_db";
+include("../conn.php");
 
 try {
     // Create a new PDO instance with the port included

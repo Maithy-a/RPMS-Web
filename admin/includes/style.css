@@ -1,0 +1,51 @@
+#accordionSidebar {
+    background-color: #003459; 
+}
+.topbar{
+     background-color: #003459 !important; 
+     border-left: dotted 0.1px #ffffff;
+     padding-right:20px !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Admin home */
+/* -------------------------------------------------------------------------- */
+.info-box {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #e3e6f0;
+  border-radius: 0.375rem;
+  height: 100px;
+  box-shadow: 0 0.15rem 0.75rem rgba(58, 59, 69, 0.15);
+}
+
+.info-box-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px; 
+  height: 100%; 
+  border-radius: 0.375rem 0 0 0.375rem; 
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.info-box-content {
+  flex-grow: 1;
+  padding-left: 1rem;
+}
+
+.info-box-text {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.info-box-number {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #212529;
+}
+
+

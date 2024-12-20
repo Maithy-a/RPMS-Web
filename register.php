@@ -284,9 +284,6 @@ if (isset($_POST["submit"])) {
 </head>
 
 <body>
-
-
-
   <div class="container">
 
     <div class="card o-hnameden border-0 shadow-lg my-5">
@@ -557,7 +554,7 @@ if (isset($_POST["submit"])) {
 
   </div>
   <script type="text/javascript">
-    $('input[name = "radio"]').on('change', function() {
+    $('input[name = "radio"]').on('change', function () {
       $('input[name = "programme"]').attr('disabled', this.value != "Enable");
       $('input[name = "regno"]').attr('disabled', this.value != "Enable");
       $('input[name = "occupation"]').attr('disabled', this.value != "Disable");
@@ -567,7 +564,7 @@ if (isset($_POST["submit"])) {
     });
   </script>
   <script type="text/javascript">
-    $("#durations").on('change', function() {
+    $("#durations").on('change', function () {
       $('#terms option[value = 2]').attr('disabled', this.value == 3);
       $('#terms option[value = 4]').attr('disabled', this.value == 3);
       $('#terms option[value = 4]').attr('disabled', this.value == 6);
@@ -575,80 +572,80 @@ if (isset($_POST["submit"])) {
     });
   </script>
   <script>
-    $(document).ready(function() {
-      $('input:checkbox').click(function() {
+    $(document).ready(function () {
+      $('input:checkbox').click(function () {
         $('input:checkbox').not(this).prop('checked', false);
       });
     });
   </script>
   <script type="text/javascript">
-    $(document).ready(function() {
-      $("input[name='price']").click(function() {
+    $(document).ready(function () {
+      $("input[name='price']").click(function () {
         var radioValue = $("input[name='price']:checked").val();
         if (radioValue == 50000) {
           var out = "<?php $con = mysqli_connect('localhost', 'root', '');
-                      mysqli_select_db($con, 'rental_house');
-                      $sql = "SELECT house_id,house_name FROM house WHERE rent_per_month = '50000' AND status = 'Empty'";
-                      $res = mysqli_query($con, $sql);
-                      $row = mysqli_fetch_assoc($res);
-                      echo "<div class='col-sm-6 mb-3 mb-sm-0'>";
-                      echo "<select class='custom-select' style='width:200px;' name = 'house'>";
-                      do {
-                        echo "<option value =' " . $row["house_id"] . "'>" . $row["house_name"] . "</option>";
-                        $row = mysqli_fetch_assoc($res);
-                      } while ($row);
-                      echo "</select>";
-                      echo "</div>";
-                      ?>";
+          mysqli_select_db($con, 'rental_house');
+          $sql = "SELECT house_id,house_name FROM house WHERE rent_per_month = '50000' AND status = 'Empty'";
+          $res = mysqli_query($con, $sql);
+          $row = mysqli_fetch_assoc($res);
+          echo "<div class='col-sm-6 mb-3 mb-sm-0'>";
+          echo "<select class='custom-select' style='width:200px;' name = 'house'>";
+          do {
+            echo "<option value =' " . $row["house_id"] . "'>" . $row["house_name"] . "</option>";
+            $row = mysqli_fetch_assoc($res);
+          } while ($row);
+          echo "</select>";
+          echo "</div>";
+          ?>";
           document.getElementById("values").innerHTML = out;
 
         } else if (radioValue == 60000) {
           var out = "<?php $con = mysqli_connect('localhost', 'root', '');
-                      mysqli_select_db($con, 'rental_house');
-                      $sql = "SELECT house_id,house_name FROM house WHERE rent_per_month = '60000' AND status = 'Empty'";
-                      $res = mysqli_query($con, $sql);
-                      $row = mysqli_fetch_assoc($res);
-                      echo "<div class='col-sm-6 mb-3 mb-sm-0'>";
-                      echo "<select class='custom-select' style='width:200px;' name = 'house'>";
-                      do {
-                        echo "<option value =' " . $row["house_id"] . "'>" . $row["house_name"] . "</option>";
-                        $row = mysqli_fetch_assoc($res);
-                      } while ($row);
-                      echo "</select>";
-                      echo "</div>";
-                      ?>";
+          mysqli_select_db($con, 'rental_house');
+          $sql = "SELECT house_id,house_name FROM house WHERE rent_per_month = '60000' AND status = 'Empty'";
+          $res = mysqli_query($con, $sql);
+          $row = mysqli_fetch_assoc($res);
+          echo "<div class='col-sm-6 mb-3 mb-sm-0'>";
+          echo "<select class='custom-select' style='width:200px;' name = 'house'>";
+          do {
+            echo "<option value =' " . $row["house_id"] . "'>" . $row["house_name"] . "</option>";
+            $row = mysqli_fetch_assoc($res);
+          } while ($row);
+          echo "</select>";
+          echo "</div>";
+          ?>";
           document.getElementById("values").innerHTML = out;
         } else if (radioValue == 70000) {
           var out = "<?php $con = mysqli_connect('localhost', 'root', '');
-                      mysqli_select_db($con, 'rental_house');
-                      $sql = "SELECT house_id,house_name FROM house WHERE rent_per_month = '70000' AND status = 'Empty'";
-                      $res = mysqli_query($con, $sql);
-                      $row = mysqli_fetch_assoc($res);
-                      echo "<div class='col-sm-6 mb-3 mb-sm-0'>";
-                      echo "<select class='custom-select' style='width:200px;' name = 'house'>";
-                      do {
-                        echo "<option value =' " . $row["house_id"] . "'>" . $row["house_name"] . "</option>";
-                        $row = mysqli_fetch_assoc($res);
-                      } while ($row);
-                      echo "</select>";
-                      echo "</div>";
-                      ?>";
+          mysqli_select_db($con, 'rental_house');
+          $sql = "SELECT house_id,house_name FROM house WHERE rent_per_month = '70000' AND status = 'Empty'";
+          $res = mysqli_query($con, $sql);
+          $row = mysqli_fetch_assoc($res);
+          echo "<div class='col-sm-6 mb-3 mb-sm-0'>";
+          echo "<select class='custom-select' style='width:200px;' name = 'house'>";
+          do {
+            echo "<option value =' " . $row["house_id"] . "'>" . $row["house_name"] . "</option>";
+            $row = mysqli_fetch_assoc($res);
+          } while ($row);
+          echo "</select>";
+          echo "</div>";
+          ?>";
           document.getElementById("values").innerHTML = out;
         } else {
           var out = "<?php $con = mysqli_connect('localhost', 'root', '');
-                      mysqli_select_db($con, 'rental_house');
-                      $sql = "SELECT house_id,house_name FROM house WHERE rent_per_month = '80000' AND status = 'Empty'";
-                      $res = mysqli_query($con, $sql);
-                      $row = mysqli_fetch_assoc($res);
-                      echo "<div class='col-sm-6 mb-3 mb-sm-0'>";
-                      echo "<select class='custom-select' style='width:200px;' name = 'house'>";
-                      do {
-                        echo "<option value =' " . $row["house_id"] . "'>" . $row["house_name"] . "</option>";
-                        $row = mysqli_fetch_assoc($res);
-                      } while ($row);
-                      echo "</select>";
-                      echo "</div>";
-                      ?>";
+          mysqli_select_db($con, 'rental_house');
+          $sql = "SELECT house_id,house_name FROM house WHERE rent_per_month = '80000' AND status = 'Empty'";
+          $res = mysqli_query($con, $sql);
+          $row = mysqli_fetch_assoc($res);
+          echo "<div class='col-sm-6 mb-3 mb-sm-0'>";
+          echo "<select class='custom-select' style='width:200px;' name = 'house'>";
+          do {
+            echo "<option value =' " . $row["house_id"] . "'>" . $row["house_name"] . "</option>";
+            $row = mysqli_fetch_assoc($res);
+          } while ($row);
+          echo "</select>";
+          echo "</div>";
+          ?>";
           document.getElementById("values").innerHTML = out;
         }
       });
