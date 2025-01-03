@@ -30,7 +30,7 @@ include("includes/session.php");
           <h1 class="h3 mb-2 text-gray-800">Tenant-Out Form.</h1>
           <p style="color:red;"><b><b>Please fill the required information upon tenant leaving the House.</b></b></p>
 
-          <div class="card shadow mb-4">
+          <div class="card shadow-sm mb-4">
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">

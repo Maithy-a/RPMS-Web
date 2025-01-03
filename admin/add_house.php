@@ -2,8 +2,9 @@
 <html lang="en">
 <?php
 include("includes/session.php");
+include("../conn.php"); // Database connection 
 ?>
-<?php include 'includes/head.php' ?>
+<?php include 'includes/head.php'; ?>
 
 <body id="page-top">
 
@@ -21,78 +22,88 @@ include("includes/session.php");
       <div id="content">
 
         <!-- Topbar -->
-        <?php include 'includes/topbar.php' ?>
+        <?php include 'includes/topbar.php'; ?>
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->
-
-          <!-- DataTables Example -->
-          <div class="card shadow mb-4">
+          <div class="card shadow-sm mb-4">
             <div class="card-header">
               <h1 class="h3 mb-2 text-gray-800">Add House</h1>
             </div>
             <div class="card-body">
+
+              <div class="alert alert-warning" role="alert">
+                <strong>Note:</strong> Please choose a tenant to change the contract information.
+              </div>
+
               <div class="table-responsive">
-                <table class="table table-borderless" id="dataTable" cellspacing="0">
-                  <tbody>
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                  <table class="table table-borderless" cellspacing="0">
+                    <tbody>
                       <tr>
+                        <td>House Name:</td>
+                        <td><input type="text" class="form-control form-control-user" placeholder="Example: A1,B1,C1,B3"
+                            name="name" required></td>
+                      </tr>
+                      <tr>
+                        <td>Is there a compartment?</td>
                         <td>
-                          House Name:
+                          <select class="form-control custom-select" name="compartment" required>
+                            <option value="" disabled selected>Select Compartment</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
                         </td>
-                        <td><input type='text' class='form-control form-control-user' style="width:300px;" name='name'
-                            required></td>
+                      </tr>
+                      <tr>
+                        <td>Cost of the House:</td>
+                        <td>
+                          <select class="custom-select form-control-user" name="cost" required>
+                            <option value="" disabled selected>Select rent amount</option>
+                            <option value="50000">Ksh. 50,000/=</option>
+                            <option value="60000">Ksh. 60,000/=</option>
+                            <option value="70000">Ksh. 70,000/=</option>
+                            <option value="80000">Ksh. 80,000/=</option>
+                          </select>
+                        </td>
                       </tr>
 
-                      <tr>
-                        <td>
-                          Is there a compartment?
-                        </td>
-                        <td>
-                          <select class="custom-select" name="compartment" id="terms" style="width:300px;" required>
-                            <option value="Yes" id="1">Yes</option>
-                            <option value="No" id="2">No</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Cost of the House:
-                        </td>
-                        <td>
-                          <select class="custom-select" name="cost" id="terms" style="width:300px;" required>
-                            <option value="50000" id="1"> Ksh. 50,000/=</option>
-                            <option value="60000" id="2">Ksh. 60,000/=</option>
-                            <option value="70000" id="4">Ksh. 70,000/=</option>
-                            <option value="80000" id="4">Ksh. 80,000/=</option>
-                          </select>
-                        </td>
-                      </tr>
                       <tr>
                         <td></td>
-                        <td><input class='btn btn-outline-success btn-user ' style="width:300px;" type='submit'
-                            name='submit' value='Add the House'></td>
-                    </form>
-                    <tr>
-                  </tbody>
-                  <?php
-                  if (isset($_POST["submit"])) {
-                    $house = $_POST['name'];
-                    $compartment = $_POST["compartment"];
-                    $cost = $_POST['cost'];
-                    $status = "Empty";
-                    $sql = "INSERT INTO house VALUES (' ','$house','$compartment','$cost','$status')";
-                    mysqli_query($con, $sql);
-                    mysqli_close($con);
-                    echo "<script>toastr.success('The house has been added successfully!', 'Success');</script>";
-                    echo '<style>body{display:none;}</style>';
-                    echo '<script>window.location.href = "house_detail.php";</script>';
+                        <td><input class="btn btn-outline-success btn-user" type="submit" name="submit"
+                            value="Add the House"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </form>
+                <?php
+                if (isset($_POST["submit"])) {
+                  // Collect input data
+                  $house_name = mysqli_real_escape_string($con, $_POST['name']);
+                  $compartment = mysqli_real_escape_string($con, $_POST["compartment"]);
+                  $cost = mysqli_real_escape_string($con, $_POST['cost']);
+                  $status = "Empty"; // Default status
+                
+                  // Insert data into the database
+                  $sql = "INSERT INTO house (house_name, compartment, rent_per_month, status) 
+                          VALUES ('$house_name', '$compartment', '$cost', '$status')";
+
+                  if (mysqli_query($con, $sql)) {
+                    echo "<script>
+                            toastr.success('The house has been added successfully, see house details to confirm!', 'Success');
+                            setTimeout(function() { window.location.href = 'add_house.php'; }, 2000);
+                          </script>";
+                  } else {
+                    echo "<script>
+                            toastr.error('Error: Unable to add house. Please try again.', 'Error');
+                          </script>";
                   }
 
-                  ?>
-                </table>
+                  mysqli_close($con);
+                }
+                ?>
               </div>
             </div>
           </div>
@@ -115,9 +126,7 @@ include("includes/session.php");
     <i class="fas fa-angle-up"></i>
   </a>
 
-
   <?php include 'includes/script.php'; ?>
-
 </body>
 
 </html>

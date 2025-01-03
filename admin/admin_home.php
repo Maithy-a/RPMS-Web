@@ -83,15 +83,17 @@ include("includes/session.php");
                   <span class="info-box-text">Total Income</span>
                   <span class="info-box-number">
                     <?php
-                    $sql = "SELECT SUM(amount) FROM payment";
+                    $sql = "SELECT SUM(amount) AS total_income FROM payment";
                     $query = mysqli_query($con, $sql);
                     $res = mysqli_fetch_assoc($query);
-                    echo "Ksh. " . number_format($res['SUM(amount)']) . "/=";
+                    $total_income = $res['total_income'] ?? 0; // Use 0 if NULL
+                    echo "Ksh. " . number_format($total_income) . "/=";
                     ?>
                   </span>
                 </div>
               </div>
             </div>
+
 
             <!-- Number of Active Contracts -->
             <div class="col-md-3 col-sm-6 mb-4">
@@ -119,7 +121,7 @@ include("includes/session.php");
           <!-- Area Chart -->
           <div class="row">
             <div class="col-xl-12 col-lg-12">
-              <div class="card shadow mb-4">
+              <div class="card shadow-sm mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-gray">Total Payments Per Month</h6>
                 </div>
@@ -131,8 +133,6 @@ include("includes/session.php");
               </div>
             </div>
           </div>
-
-          <!-- Chart.js Initialization -->
 
 
         </div>
@@ -153,8 +153,6 @@ include("includes/session.php");
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-
-
 
   <?php include 'includes/script.php'; ?>
   <?php include 'includes/DataTables.php'; ?>

@@ -1,8 +1,4 @@
-<?php
-session_start();
-include "conn.php";
-?>
-
+<?php include("conn.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,8 +15,6 @@ include "conn.php";
     <link rel="manifest" href="res/img/favicon_io/site.webmanifest">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/css/sb-admin-2.min.css"
         rel="stylesheet">
@@ -42,186 +36,84 @@ include "conn.php";
 <body>
     <?php
 
-    function check($data)
-    {
-        global $con;
-        $data = trim($data);
-        $data = htmlspecialchars($data);
-        $data = stripslashes($data);
-        $data = mysqli_real_escape_string($con, $data);
-        return $data;
-    }
-
     if (isset($_POST["login"])) {
         $uname = $_POST['username'];
         $pword = md5($_POST['password']);
-        $sql = "SELECT * FROM tenant WHERE u_name = '$uname' AND p_word = '$pword'";
-        $sql1 = "SELECT * FROM user WHERE u_name = '$uname' AND pword = '$pword'";
+
+        // Query tenant table
+        $sql = "SELECT * FROM tenant WHERE u_name = '$uname'";
         $query = mysqli_query($con, $sql);
-        $query1 = mysqli_query($con, $sql1);
         $row = mysqli_fetch_assoc($query);
+
+        // Query user table
+        $sql1 = "SELECT * FROM user WHERE u_name = '$uname'";
+        $query1 = mysqli_query($con, $sql1);
         $row1 = mysqli_fetch_assoc($query1);
-        $role = '';
-        while ($row1) {
-            $role = $row1['role'];
-            $row1 = mysqli_fetch_assoc($query1);
-        }
 
-        while ($row) {
-            $fname = $row['fname'];
-            $lname = $row['lname'];
-            $stat = $row['status'];
-            $id = $row['tenant_id'];
-            $sql2 = "SELECT * FROM contract WHERE tenant_id = '$id'";
-            $query2 = mysqli_query($con, $sql2);
-            $row1 = mysqli_fetch_assoc($query2);
+        if (!$row && !$row1) {
+            // User not found in either table
+            echo "<script>
+                toastr.error('User not found. Please check your credentials.', 'Login Failed');
+              </script>";
+        } else {
+            $isPasswordCorrect = false;
 
-            while ($row1) {
-                $end_date = $row1['end_day'];
-                $h_id = $row1['house_id'];
-                $row1 = mysqli_fetch_assoc($query2);
-            }
-            $row = mysqli_fetch_assoc($query);
-        }
-
-        if ((mysqli_num_rows($query) == 1) || (mysqli_num_rows($query1) == 1)) {
-            if ($role == "Administrator") {
+            if ($row && $row['p_word'] === $pword) {
+                // Tenant login
+                $isPasswordCorrect = true;
                 $_SESSION['username'] = $uname;
-                echo "
-            <script>
-                toastr.options = {
-                    'closeButton': true,
-                    'progressBar': true,
-                    'positionClass': 'toast-top-right',
-                    'timeOut': '5000'
-                };
-                toastr.success('Welcome back: $uname!', 'Login Successful');
-                setTimeout(function() {
-                    window.location.href = 'admin/admin_home.php';
-                }, 3000);
-            </script>";
-            } elseif ($role == "Manager") {
-                $_SESSION['username'] = $uname;
-                echo "
-            <script>
-                toastr.options = {
-                    'closeButton': true,
-                    'progressBar': true,
-                    'positionClass': 'toast-top-right',
-                    'timeOut': '5000'
-                };
-                toastr.success('Welcome back: $uname!', 'Login Successful');
-                setTimeout(function() {
-                    window.location.href = 'manager/manager_home.php';
-                }, 3000);
-            </script>";
-            } else {
+                $_SESSION['role'] = 'Tenant'; // Assign default role for tenants
+    
+                // Tenant status handling
+                $fname = $row['fname'];
+                $lname = $row['lname'];
+                $stat = $row['status'];
+                $tenant_id = $row['tenant_id'];
+
                 if ($stat == 0) {
-                    $_SESSION['username'] = $uname;
-                    echo "
-                <script>
-                    toastr.options = {
-                        'closeButton': true,
-                        'progressBar': true,
-                        'positionClass': 'toast-top-right',
-                        'timeOut': '5000'
-                    };
-                    toastr.success('Welcome $fname $lname!', 'Login Successful');
-                    setTimeout(function() {
-                        window.location.href = 'tenants/initial_payment.php';
-                    }, 3000);
-                </script>";
+                    echo "<script>
+                        toastr.success('Welcome $fname $lname!', 'Login Successful');
+                        setTimeout(function() { window.location.href = 'tenants/initial_payment.php'; }, 3000);
+                      </script>";
                 } elseif ($stat == 1) {
-                    $_SESSION['username'] = $uname;
-                    echo "
-                <script>
-                    toastr.options = {
-                        'closeButton': true,
-                        'progressBar': true,
-                        'positionClass': 'toast-top-right',
-                        'timeOut': '5000'
-                    };
-                    toastr.success('Welcome $fname $lname!', 'Login Successful');
-                    setTimeout(function() {
-                        window.location.href = 'tenants/home.php';
-                    }, 3000);
-                </script>";
+                    echo "<script>
+                        toastr.success('Welcome $fname $lname!', 'Login Successful');
+                        setTimeout(function() { window.location.href = 'tenants/home.php'; }, 3000);
+                      </script>";
                 } elseif ($stat == 2) {
-                    $_SESSION['username'] = $uname;
-                    echo "
-                <script>
-                    toastr.options = {
-                        'closeButton': true,
-                        'progressBar': true,
-                        'positionClass': 'toast-top-right',
-                        'timeOut': '5000'
-                    };
-                    toastr.success('Welcome $fname $lname!', 'Login Successful');
-                    setTimeout(function() {
-                        window.location.href = 'tenants/waiting.php';
-                    }, 3000);
-                </script>";
-                } elseif ((date('Y-m-d') > $end_date) && $stat == 1) {
-                    $sql3 = "UPDATE tenant SET status = '3' WHERE tenant_id = '$id'";
-                    mysqli_query($con, $sql3);
-                    $sql5 = "UPDATE contract SET status ='Inactive' WHERE status = 'Active' AND tenant_id = '$id'";
-                    mysqli_query($con, $sql5);
-                    $sql5 = "UPDATE house SET status ='Empty' WHERE house_id = '$h_id'";
-                    mysqli_query($con, $sql5);
-                    $_SESSION['username'] = $uname;
-                    echo "
-                <script>
-                    toastr.options = {
-                        'closeButton': true,
-                        'progressBar': true,
-                        'positionClass': 'toast-top-right',
-                        'timeOut': '7000'
-                    };
-                    toastr.warning('Welcome $fname $lname! Your contract has expired. Please renew to access the system.', 'Contract Expired');
-                    setTimeout(function() {
-                        window.location.href = 'tenants/renew_contract.php';
-                    }, 5000);
-                </script>";
-                } elseif ($stat == 3) {
-                    $_SESSION['username'] = $uname;
-                    echo "
-                <script>
-                    toastr.options = {
-                        'closeButton': true,
-                        'progressBar': true,
-                        'positionClass': 'toast-top-right',
-                        'timeOut': '7000'
-                    };
-                    toastr.warning('Welcome $fname $lname! Your contract has expired. Please renew to access the system.', 'Contract Expired');
-                    setTimeout(function() {
-                        window.location.href = 'tenants/renew_contract.php';
-                    }, 5000);
-                </script>";
+                    echo "<script>
+                        toastr.success('Welcome $fname $lname!', 'Login Successful');
+                        setTimeout(function() { window.location.href = 'tenants/waiting.php'; }, 3000);
+                      </script>";
+                }
+            } elseif ($row1 && $row1['pword'] === $pword) {
+                // Manager or Administrator login
+                $isPasswordCorrect = true;
+                $_SESSION['username'] = $uname;
+                $_SESSION['role'] = $row1['role']; // Assign role from the user table
+    
+                if ($_SESSION['role'] === "Administrator") {
+                    echo "<script>
+                        toastr.success('Welcome back: $uname!', 'Login Successful');
+                        setTimeout(function() { window.location.href = 'admin/admin_home.php'; }, 3000);
+                      </script>";
+                } elseif ($_SESSION['role'] === "Manager") {
+                    echo "<script>
+                        toastr.success('Welcome back: $uname!', 'Login Successful');
+                        setTimeout(function() { window.location.href = 'manager/manager_home.php'; }, 3000);
+                      </script>";
                 }
             }
-            mysqli_close($con);
-            $uname = "";
-        } else {
-            echo "
-        <script>
-            toastr.options = {
-                'closeButton': true,
-                'progressBar': true,
-                'positionClass': 'toast-top-right',
-                'timeOut': '5000'
-            };
-            toastr.error('Incorrect Username or Password!!!', 'Login Failed');
-        </script>";
-        }
 
+            if (!$isPasswordCorrect) {
+                echo "<script>
+                    toastr.error('Incorrect Password. Please try again.', 'Login Failed');
+                  </script>";
+            }
+        }
+        mysqli_close($con);
     }
     ?>
-
-    <div class="loader">
-        <div></div>
-        <div></div>
-    </div>
-    <div class="blurred-content">
 
         <div class="container">
 
@@ -268,7 +160,6 @@ include "conn.php";
                                             <!-- submit button -->
                                             <input class="btn btn-outline-primary btn-block" type="submit" name="login"
                                                 value="Sign in">
-
                                         </form>
 
                                         <hr>
@@ -282,8 +173,6 @@ include "conn.php";
                                         <div class="text-end"> <a
                                                 class="small text-sm-end link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
                                                 href="index.html">Back Home</a></div>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -293,21 +182,11 @@ include "conn.php";
             </div>
 
         </div>
-
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sb-admin-2@latest/js/sb-admin-2.min.js"></script>
         <!-- Include Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            window.addEventListener('load', function () {
-                setTimeout(function () {
-                    document.querySelector('.loader').style.display = 'none';
-                    document.querySelector('.blurred-content').style.filter = 'none';
-                }, 2000);
-            });
-        </script>
 </body>
 
 </html>

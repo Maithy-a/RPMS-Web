@@ -29,8 +29,8 @@ include("includes/session.php");
 
           <!-- Page Heading -->
 
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
+          <!-- DataTable-->
+          <div class="card shadow-sm mb-4">
             <div class="card-header">
               <h1 class="h3 mb-2 text-gray-800">Contracts</h1>
             </div>
@@ -38,11 +38,15 @@ include("includes/session.php");
               <div class="table-responsive">
                 <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
 
+                  <div class="alert alert-warning" role="alert">
+                    <strong>Note:</strong> Please choose a tenant to change the contract information.
+                  </div>
+
                   <tbody>
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                       <tr>
                         <td>
-                          <b><b>Please choose a tenant to change the contract information.</b></b>:
+                          Tenant
                         </td>
                         <td><select class='custom-select' name='tenant' id='values'>
 
@@ -54,7 +58,8 @@ include("includes/session.php");
                           Contract Duration:
                         </td>
                         <td>
-                          <select class="custom-select" name="duration">
+                          <select class="custom-select" name="duration" required>
+                            <option value="" disabled selected>Select Contract Duration</option>
                             <option value="3">3 months</option>
                             <option value="6">6 months</option>
                             <option value="12">12 months</option>
@@ -66,7 +71,8 @@ include("includes/session.php");
                           Payment Terms:
                         </td>
                         <td>
-                          <select class="custom-select" name="term" id="terms" >
+                          <select class="custom-select" name="term" id="terms" required>
+                            <option value="" disabled selected>Select Payment Term(s)</option>
                             <option value="1" id="1">1 term</option>
                             <option value="2" id="2">2 terms</option>
                             <option value="4" id="4">4 terms</option>
@@ -80,6 +86,7 @@ include("includes/session.php");
                     </form>
                     <tr>
                   </tbody>
+
                   <?php
                   if (isset($_POST["submit"])) {
                     $id = $_POST['id'];
@@ -232,8 +239,7 @@ include("includes/session.php");
   </script>
 
 
-<?php include "includes/script.php";?>
-<?php include "includes/DataTables.php";?>
+  <?php include "includes/script.php"; ?>
 </body>
 
 </html>

@@ -1,10 +1,9 @@
-<?php
-include("includes/session.php");
-?>
 <!DOCTYPE html>
 <html lang="en">
-
+  
+<?php include 'includes/session.php'; ?>
 <?php include 'includes/head.php' ?>
+
 
 <body id="page-top">
 
@@ -29,7 +28,7 @@ include("includes/session.php");
 
           <!-- Page Heading -->
 
-          <div class="card shadow mb-4">
+          <div class="card shadow-sm mb-4">
             <div class="card-header">
               <h1 class="h3 mb-2 text-gray-800">Houses</h1>
 
@@ -78,7 +77,6 @@ include("includes/session.php");
 
                       $row = mysqli_fetch_assoc($result);
                     } while ($row);
-
 
                     ?>
 

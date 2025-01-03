@@ -47,7 +47,7 @@ function check($data)
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <div class="card shadow mb-4">
+          <div class="card shadow-sm mb-4">
             <div class="card-header">
 
               <h2 class="h3 mb-2 text-gray-800">Change Password</h2>

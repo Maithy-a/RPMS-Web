@@ -2,8 +2,9 @@
 <html lang="en">
 <?php
 include("includes/session.php");
+include("../conn.php"); // database connection
+include 'includes/head.php';
 ?>
-<?php include 'includes/head.php' ?>
 
 <body id="page-top">
 
@@ -20,17 +21,15 @@ include("includes/session.php");
       <div id="content">
 
         <!-- Topbar -->
-        <?php include 'includes/topbar.php' ?>
+        <?php include 'includes/topbar.php'; ?>
 
         <!-- Begin Page Content -->
-
         <div class="container">
-          <div class="card o-hnameden border my-5">
+          <div class="card o-hidden border my-5">
             <div class="card-body p-0">
 
               <!-- Nested Row within Card Body -->
               <div class="row">
-
                 <div class="col-lg-12">
                   <div class="card-body p-5">
                     <div class="text-center mb-4">
@@ -38,32 +37,36 @@ include("includes/session.php");
                       <hr>
                     </div>
 
+                    <!-- Registration Form -->
                     <form class="user" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                       <!-- Name and Username -->
                       <div class="form-group row">
                         <div class="col-sm-6 mb-3">
-                          <input type="text" class="form-control" name="Name" value="<?php echo @$name; ?>"
-                            placeholder="Name" required>
+                          <input type="text" class="form-control" name="name" placeholder="Full Name" required>
                         </div>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" name="uName" value="<?php echo @$uname; ?>"
-                            placeholder="User Name" required>
+                          <input type="text" class="form-control" name="u_name" placeholder="Username" required>
                         </div>
                       </div>
 
-                      <!-- Phone Number and Role -->
+                      <!-- Email and Phone Number -->
                       <div class="form-group row">
                         <div class="col-sm-6 mb-3">
-                          <input type="text" class="form-control" name="pno1" value="<?php echo @$pno; ?>"
-                            placeholder="Phone Number (e.g., 254712345678)" required>
+                          <input type="email" class="form-control" name="email" placeholder="Email Address" required>
                         </div>
                         <div class="col-sm-6">
-                          <select class="form-control" name="role" id="durations" required>
-                            <option value="" disabled selected>User Role</option>
-                            <option value="Administrator">Administrator</option>
-                            <option value="Manager">Manager</option>
-                          </select>
+                          <input type="text" class="form-control" name="pno"
+                            placeholder="Phone Number (e.g., 254712345678)" required>
                         </div>
+                      </div>
+
+                      <!-- Role Selection -->
+                      <div class="form-group">
+                        <select class="form-control" name="role" required>
+                          <option value="" disabled selected>Select User Role</option>
+                          <option value="Administrator">Administrator</option>
+                          <option value="Manager">Manager</option>
+                        </select>
                       </div>
 
                       <!-- Password and Repeat Password -->
@@ -71,8 +74,9 @@ include("includes/session.php");
                         <div class="col-sm-6 mb-3">
                           <input type="password" class="form-control" name="password" placeholder="Password" required>
                         </div>
+
                         <div class="col-sm-6">
-                          <input type="password" class="form-control" name="repeatPassword"
+                          <input type="password" class="form-control" name="repeat_password"
                             placeholder="Repeat Password" required>
                         </div>
                       </div>
@@ -93,51 +97,50 @@ include("includes/session.php");
             </div>
           </div>
         </div>
-        <script type="text/javascript">
-          $('input[name = "radio"]').on('change', function () {
-            $('input[name = "programme"]').attr('disabled', this.value != "Enable");
-            $('input[name = "regno"]').attr('disabled', this.value != "Enable");
-            $('input[name = "occupation"]').attr('disabled', this.value != "Disable");
-            $('input[name = "programme"]').attr('required', this.value == "Enable");
-            $('input[name = "regno"]').attr('required', this.value == "Enable");
-            $('input[name = "occupation"]').attr('required', this.value == "Disable");
-          });
-        </script>
 
-        <script type="text/javascript">
-          $("#durations").on('change', function () {
-            $('#terms option[value = 2]').attr('disabled', this.value == 3);
-            $('#terms option[value = 4]').attr('disabled', this.value == 3);
-            $('#terms option[value = 4]').attr('disabled', this.value == 6);
+        <?php
+        if (isset($_POST['submit'])) {
+          // Collect input data
+          $name = mysqli_real_escape_string($con, $_POST['name']);
+          $u_name = mysqli_real_escape_string($con, $_POST['u_name']);
+          $email = mysqli_real_escape_string($con, $_POST['email']);
+          $pno = mysqli_real_escape_string($con, $_POST['pno']);
+          $role = mysqli_real_escape_string($con, $_POST['role']);
+          $password = mysqli_real_escape_string($con, $_POST['password']);
+          $repeat_password = mysqli_real_escape_string($con, $_POST['repeat_password']);
+          $hashed_password = md5($password); // Encrypt password
+          $date_reg = date('Y-m-d');
 
-          });
-        </script>
-        <script>
-          $(document).ready(function () {
-            $('input:checkbox').click(function () {
-              $('input:checkbox').not(this).prop('checked', false);
-            });
-          });
-        </script>
+          // Validation: Check if passwords match
+          if ($password !== $repeat_password) {
+            echo "<script>
+                    toastr.error('Passwords do not match. Please try again.', 'Registration Failed');
+                  </script>";
+          } else {
+            // Insert data into the database
+            $sql = "INSERT INTO user (name, u_name, email, pno, role, pword, date_reg) 
+                    VALUES ('$name', '$u_name', '$email', '$pno', '$role', '$hashed_password', '$date_reg')";
 
-        <script>
-          if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
+            if (mysqli_query($con, $sql)) {
+              echo "<script>
+                      toastr.success('New user registered successfully!', 'Registration Successful');
+                      setTimeout(function() { window.location.href = 'admin_home.php'; }, 3000);
+                    </script>";
+            } else {
+              echo "<script>
+                      toastr.error('Error: Unable to register user. Please try again.', 'Registration Failed');
+                    </script>";
+            }
           }
-        </script>
-
-
-
+        }
+        ?>
       </div>
       <!-- End of Main Content -->
 
       <!-- Footer -->
       <?php include 'includes/footer.php'; ?>
-
-
     </div>
     <!-- End of Content Wrapper -->
-
   </div>
   <!-- End of Page Wrapper -->
 
@@ -146,12 +149,8 @@ include("includes/session.php");
     <i class="fas fa-angle-up"></i>
   </a>
 
-
-
-
   <?php include 'includes/script.php'; ?>
   <?php include 'includes/DataTables.php'; ?>
-
 </body>
 
 </html>

@@ -12,24 +12,12 @@
 
 
   <link rel="stylesheet" href="res/css/index.css">
-  <link rel="stylesheet" href="res/css/loader.css">
-
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-   -->
+  <link rel="stylesheet" href="res/css/loader.css">  
   <!-- BOOTSTRAP ICONS CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <!-- 
-  <script src="//instant.page/5.2.0" type="module"
-    integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script> -->
 </head>
 
 <body>
-
-  <div class="loader">
-    <div></div>
-    <div></div>
-  </div>
-  <div class="blurred-content">
 
     <nav class="navbar">
       <div class="navbar-header">
@@ -227,7 +215,8 @@
             <h2>Social</h2>
             <ul>
               <li><a href="" class="flex"><i class="bi bi-github"></i> Github</a></li>
-              <li><a href="https://linkedin.com/in/maithya" class="flex"><i class="bi bi-linkedin"></i> Linkedin</a></li>
+              <li><a href="https://linkedin.com/in/maithya" class="flex"><i class="bi bi-linkedin"></i> Linkedin</a>
+              </li>
               <li><a href="https://x.com/Maithy_a" class="flex"><i class="bi bi-twitter-x"></i> Twitter</a></li>
               <li><a href="https://instagram.com/_b0nni3._._" class="flex"><i class="bi bi-instagram"></i> Instagram</a>
               </li>
@@ -258,19 +247,9 @@
           document.getElementById("currentYear").textContent = new Date().getFullYear();
         </script> Elsie Executive Apartments
       </div>
-
     </section>
 
     <script src="res/js/index.js" defer></script>
-
-    <script>
-      window.addEventListener('load', function () {
-        setTimeout(function () {
-          document.querySelector('.loader').style.display = 'none';
-          document.querySelector('.blurred-content').style.filter = 'none';
-        }, 2000);
-      });
-    </script>
 </body>
 
 </html>

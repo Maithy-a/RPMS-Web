@@ -28,7 +28,7 @@ include("includes/session.php");
         <div class="container-fluid">
           <h1 class="h3 mb-2 text-gray-800">Tenant-In Details</h1>
 
-          <div class="card shadow mb-4">
+          <div class="card shadow-sm mb-4">
 
             <div class="card-body">
               <div class="table-responsive">
@@ -53,8 +53,7 @@ include("includes/session.php");
                     </tr>
                   </thead>
                   <tbody>
-                    <?php
-
+                  <?php
                     $sql = "SELECT * FROM tenant_in";
                     $result = mysqli_query($con, $sql);
                     $row = mysqli_fetch_assoc($result);
@@ -123,9 +122,7 @@ include("includes/session.php");
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-
-
-
+  
   <?php include 'includes/script.php'; ?>
   <?php include 'includes/DataTables.php'; ?>
 

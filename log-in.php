@@ -1,8 +1,3 @@
-<?php
-session_start();
-include "conn.php";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,96 +33,88 @@ include "conn.php";
 </head>
 
 <body>
-<?php
-session_start();
-include "../conn.php";
+    <?php
+    session_start();
+    include "conn.php";
 
-if (isset($_POST["login"])) {
-    $uname = $_POST['username'];
-    $pword = md5($_POST['password']);
+    if (isset($_POST["login"])) {
+        $uname = $_POST['username'];
+        $pword = md5($_POST['password']);
 
-    // Query tenant table
-    $sql = "SELECT * FROM tenant WHERE u_name = '$uname'";
-    $query = mysqli_query($con, $sql);
-    $row = mysqli_fetch_assoc($query);
+        // Query tenant table
+        $sql = "SELECT * FROM tenant WHERE u_name = '$uname'";
+        $query = mysqli_query($con, $sql);
+        $row = mysqli_fetch_assoc($query);
 
-    // Query user table
-    $sql1 = "SELECT * FROM user WHERE u_name = '$uname'";
-    $query1 = mysqli_query($con, $sql1);
-    $row1 = mysqli_fetch_assoc($query1);
+        // Query user table
+        $sql1 = "SELECT * FROM user WHERE u_name = '$uname'";
+        $query1 = mysqli_query($con, $sql1);
+        $row1 = mysqli_fetch_assoc($query1);
 
-    if (!$row && !$row1) {
-        // User not found in either table
-        echo "<script>
+        if (!$row && !$row1) {
+            // User not found in either table
+            echo "<script>
                 toastr.error('User not found. Please check your credentials.', 'Login Failed');
               </script>";
-    } else {
-        $isPasswordCorrect = false;
+        } else {
+            $isPasswordCorrect = false;
 
-        if ($row && $row['p_word'] === $pword) {
-            // Tenant login
-            $isPasswordCorrect = true;
-            $_SESSION['username'] = $uname;
-            $_SESSION['role'] = 'Tenant'; // Assign default role for tenants
+            if ($row && $row['p_word'] === $pword) {
+                // Tenant login
+                $isPasswordCorrect = true;
+                $_SESSION['username'] = $uname;
+                $_SESSION['role'] = 'Tenant'; // Assign default role for tenants
+    
+                // Tenant status handling
+                $fname = $row['fname'];
+                $lname = $row['lname'];
+                $stat = $row['status'];
+                $tenant_id = $row['tenant_id'];
 
-            // Tenant status handling
-            $fname = $row['fname'];
-            $lname = $row['lname'];
-            $stat = $row['status'];
-            $tenant_id = $row['tenant_id'];
-
-            if ($stat == 0) {
-                echo "<script>
+                if ($stat == 0) {
+                    echo "<script>
                         toastr.success('Welcome $fname $lname!', 'Login Successful');
                         setTimeout(function() { window.location.href = 'tenants/initial_payment.php'; }, 3000);
                       </script>";
-            } elseif ($stat == 1) {
-                echo "<script>
+                } elseif ($stat == 1) {
+                    echo "<script>
                         toastr.success('Welcome $fname $lname!', 'Login Successful');
                         setTimeout(function() { window.location.href = 'tenants/home.php'; }, 3000);
                       </script>";
-            } elseif ($stat == 2) {
-                echo "<script>
+                } elseif ($stat == 2) {
+                    echo "<script>
                         toastr.success('Welcome $fname $lname!', 'Login Successful');
                         setTimeout(function() { window.location.href = 'tenants/waiting.php'; }, 3000);
                       </script>";
-            }
-        } elseif ($row1 && $row1['pword'] === $pword) {
-            // Manager or Administrator login
-            $isPasswordCorrect = true;
-            $_SESSION['username'] = $uname;
-            $_SESSION['role'] = $row1['role']; // Assign role from the user table
-
-            if ($_SESSION['role'] === "Administrator") {
-                echo "<script>
+                }
+            } elseif ($row1 && $row1['pword'] === $pword) {
+                // Manager or Administrator login
+                $isPasswordCorrect = true;
+                $_SESSION['username'] = $uname;
+                $_SESSION['role'] = $row1['role']; // Assign role from the user table
+    
+                if ($_SESSION['role'] === "Administrator") {
+                    echo "<script>
                         toastr.success('Welcome back: $uname!', 'Login Successful');
                         setTimeout(function() { window.location.href = 'admin/admin_home.php'; }, 3000);
                       </script>";
-            } elseif ($_SESSION['role'] === "Manager") {
-                echo "<script>
+                } elseif ($_SESSION['role'] === "Manager") {
+                    echo "<script>
                         toastr.success('Welcome back: $uname!', 'Login Successful');
                         setTimeout(function() { window.location.href = 'manager/manager_home.php'; }, 3000);
                       </script>";
+                }
             }
-        }
 
-        if (!$isPasswordCorrect) {
-            echo "<script>
+            if (!$isPasswordCorrect) {
+                echo "<script>
                     toastr.error('Incorrect Password. Please try again.', 'Login Failed');
                   </script>";
+            }
         }
+        mysqli_close($con);
     }
-    mysqli_close($con);
-}
-?>
-
-
-
-    <div class="loader">
-        <div></div>
-        <div></div>
-    </div>
-    <div class="blurred-content">
+    ?>
 
         <div class="container">
 
@@ -196,8 +183,6 @@ if (isset($_POST["login"])) {
             </div>
 
         </div>
-
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sb-admin-2@latest/js/sb-admin-2.min.js"></script>

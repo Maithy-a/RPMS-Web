@@ -1,10 +1,10 @@
-<?php
-include("includes/session.php");
-?>
 <!DOCTYPE html>
 <html lang="en">
-
-<?php include 'includes/head.php'?>
+<?php
+include("includes/session.php");
+include("../conn.php");
+?>
+<?php include 'includes/head.php'; ?>
 
 <body id="page-top">
 
@@ -22,67 +22,84 @@ include("includes/session.php");
       <div id="content">
 
         <!-- Topbar -->
-      <?php include 'includes/topbar.php';?>
-      <!-- Begin Page Content -->
+        <?php include 'includes/topbar.php'; ?>
+
+        <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Houses</h1>
-
-          <!-- DataTables Example -->
-          <div class="card shadow mb-4">
+          <div class="card shadow-sm mb-4">
+            <div class="card-header py-3">
+              <h1 class="h4 text-gray-800">Add New House</h1>
+            </div>
             <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+              <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <div class="row g-3 mb-3">
+                  <!-- House Name -->
+                  <div class="col-md-6">
+                    <label for="houseName" class="form-label">House Name</label>
+                    <input type="text" id="houseName" name="name" class="form-control" placeholder="Enter house name"
+                      required>
+                  </div>
 
-                  <tbody>
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                      <tr>
-                        <td>
-                          Previous Cost: Eg; 50000 <span style="color:red;"><b><b>(No commas nor spaces)</b></b></span>
-                        </td>
-                        <td>Ksh. <input type='text' class='form-control form-control-user' name='prev' required></td>
-                      </tr>
+                  <!-- Compartment -->
+                  <div class="col-md-6">
+                    <label for="compartment" class="form-label">Compartment</label>
+                    <select id="compartment" name="compartment" class="form-select" required>
+                      <option value="" disabled selected>Select compartment availability</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+                </div>
 
-                      <tr>
-                        <td>
-                          New Cost: Eg; 50000 <span style="color:red;"><b><b>(No commas nor spaces)</b></b></span>
-                        </td>
-                        <td>
-                          Ksh. <input type='text' class='form-control form-control-user' name='new' required>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td><input class='btn btn-outline-success btn-user ' type='submit' name='submit' value='Change'>
-                        </td>
-                    </form>
-                    <tr>
-                  </tbody>
-                  <?php
-                  if (isset($_POST["submit"])) {
-                    $prev = $_POST['prev'];
-                    $new = $_POST["new"];
-                    if (!is_numeric($prev) || !is_numeric($new)) {
-                      echo "<script type='text/javascript'>alert('The input shold be in numbers.');</script>";
-                    } else {
-                      $sql = "UPDATE house SET rent_per_month= '$new' WHERE rent_per_month = '$prev'";
-                      mysqli_query($con, $sql);
-                      mysqli_close($con);
-                      echo "<script type='text/javascript'>alert('Updated Successfully!!!');</script>";
-                      echo '<style>body{display:none;}</style>';
-                      echo '<script>window.location.href = "house_detail.php";</script>';
-                      exit;
-                    }
+                <div class="row g-3 mb-3">
+                  <!-- Cost of the House -->
+                  <div class="col-md-6">
+                    <label for="cost" class="form-label">Monthly Rent (Ksh)</label>
+                    <select id="cost" name="cost" class="form-select" required>
+                      <option value="" disabled selected>Select rent amount</option>
+                      <option value="50000">50,000</option>
+                      <option value="60000">60,000</option>
+                      <option value="70000">70,000</option>
+                      <option value="80000">80,000</option>
+                    </select>
+                  </div>
+                </div>
 
-
-
-                  }
-                  ?>
-                </table>
-              </div>
+                <div class="d-flex justify-content-end">
+                  <button type="submit" name="submit" class="btn btn-outline-success">Add House</button>
+                </div>
+              </form>
             </div>
           </div>
+
+        <?php
+          if (isset($_POST["submit"])) {
+            // Collect input data
+            $house_name = mysqli_real_escape_string($con, $_POST['name']);
+            $compartment = mysqli_real_escape_string($con, $_POST["compartment"]);
+            $cost = mysqli_real_escape_string($con, $_POST['cost']);
+            $status = "Empty"; // Default status
+          
+            // Insert data into the database
+            $sql = "INSERT INTO house (house_name, compartment, rent_per_month, status) 
+                    VALUES ('$house_name', '$compartment', '$cost', '$status')";
+
+            if (mysqli_query($con, $sql)) {
+              echo "<script>
+                      toastr.success('The house has been added successfully!', 'Success');
+                      setTimeout(function() { window.location.href = 'house_detail.php'; }, 2000);
+                    </script>";
+            } else {
+              echo "<script>
+                      toastr.error('Error: Unable to add house. Please try again.', 'Error');
+                    </script>";
+            }
+
+            mysqli_close($con);
+          }
+          ?>
 
         </div>
         <!-- /.container-fluid -->
@@ -92,11 +109,8 @@ include("includes/session.php");
 
       <!-- Footer -->
       <?php include 'includes/footer.php'; ?>
-
-
     </div>
     <!-- End of Content Wrapper -->
-
   </div>
   <!-- End of Page Wrapper -->
 
@@ -105,10 +119,7 @@ include("includes/session.php");
     <i class="fas fa-angle-up"></i>
   </a>
 
-
-
   <?php include 'includes/script.php'; ?>
-
 </body>
 
 </html>

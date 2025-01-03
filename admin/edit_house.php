@@ -30,8 +30,8 @@ include("includes/session.php");
           <!-- Page Heading -->
 
 
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
+          <!-- DataTable-->
+          <div class="card shadow-sm mb-4">
             <div class="card-header">
               <h1 class="h3 mb-2 text-gray-800">House</h1>
             </div>
@@ -41,12 +41,9 @@ include("includes/session.php");
               <div class="table-responsive">
                 <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
 
-                  <blockquote class="blockquote mb-0">
-                    <footer class="blockquote-footer">
-                      <p style="color:red;">Please choose a house to change from the table below.
-                      </p>
-                    </footer>
-                  </blockquote>
+                  <div class="alert alert-warning" role="alert">
+                    <strong>Note:</strong> Please choose a house to change from the table below.
+                  </div>
 
                   <tbody>
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
@@ -55,7 +52,7 @@ include("includes/session.php");
                           House ID:
                         </td>
                         <td><input type='text' class='form-control form-control-user' name='id'
-                            value="<?php echo @$_GET['id']; ?>" readonly ></td>
+                            value="<?php echo @$_GET['id']; ?>" readonly></td>
                       </tr>
 
                       <tr>

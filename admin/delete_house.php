@@ -1,65 +1,57 @@
 <?php
-session_start();
-include "../conn.php";
-include "includes/head.php";
-
+include("conn.php"); 
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Fetch the house status
-    $sql = "SELECT status FROM house WHERE house_id = ?";
-    $stmt = $con->prepare($sql);
+    // Fetch the house to verify its existence
+    $query = "SELECT * FROM house WHERE house_id = ?";
+    $stmt = $con->prepare($query);
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($row = $result->fetch_assoc()) {
-        $stat = $row['status'];
-
-        // Delete the house
-        $sql = "DELETE FROM house WHERE house_id = ?";
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("i", $id);
-
-        if ($stmt->execute()) {
-            if ($stat == 'Occupied') {
-                echo "<script>toastr.success('House deleted successfully, and related contracts updated!');</script>";
-                echo '<script>window.location.href = "house_detail.php";</script>';
-
-                // Update related contracts
-                $query = "SELECT tenant_id FROM contract WHERE house_id = ?";
-                $stmt1 = $con->prepare($query);
-                $stmt1->bind_param("i", $id);
-                $stmt1->execute();
-                $result1 = $stmt1->get_result();
-
-                while ($row1 = $result1->fetch_assoc()) {
-                    $tid = $row1['tenant_id'];
-                    $sqlUpdate = "UPDATE contract SET status = 'Inactive' WHERE tenant_id = ?";
-                    $stmtUpdate = $con->prepare($sqlUpdate);
-                    $stmtUpdate->bind_param("i", $tid);
-                    $stmtUpdate->execute();
-                    $stmtUpdate->close();
-                }
-                $stmt1->close();
-            } else {
-                echo "<script>toastr.success('House deleted successfully!', 'Success');</script>";
-                echo '<script>window.location.href = "house_detail.php";</script>';
-            }
+    if ($result->num_rows > 0) {
+        // Proceed with deletion
+        $deleteQuery = "DELETE FROM house WHERE house_id = ?";
+        $deleteStmt = $con->prepare($deleteQuery);
+        $deleteStmt->bind_param("i", $id);
+        if ($deleteStmt->execute()) {
+            // Success toast notification
+            echo "<script>
+                toastr.success('House deleted successfully!', 'Success');
+                setTimeout(function() {
+                    window.location.href = 'houses.php';
+                }, 3000);
+            </script>";
         } else {
-            echo "<script>toastr.error('Failed to delete house: " . htmlspecialchars(mysqli_error($con)) . "', 'Error' );</script>";
-            echo '<script>window.location.href = "house_detail.php";</script>';
+            // Error toast notification
+            echo "<script>
+                toastr.error('Failed to delete the house. Please try again.', 'Error');
+                setTimeout(function() {
+                    window.location.href = 'houses.php';
+                }, 3000);
+            </script>";
         }
+        $deleteStmt->close();
     } else {
-        echo "<script>toastr.error('House not found.', 'Error');</script>";
-        echo '<script>window.location.href = "house_detail.php";</script>';
+        // House not found toast notification
+        echo "<script>
+            toastr.error('House not found.', 'Error');
+            setTimeout(function() {
+                window.location.href = 'houses.php';
+            }, 3000);
+        </script>";
     }
-
     $stmt->close();
 } else {
-    echo "<script>toastr.error('Invalid ID.', 'Error');</script>";
-    echo '<script>window.location.href = "house_detail.php";</script>';
+    // Invalid ID toast notification
+    echo "<script>
+        toastr.error('Invalid house ID.', 'Error');
+        setTimeout(function() {
+            window.location.href = 'houses.php';
+        }, 3000);
+    </script>";
 }
 
 mysqli_close($con);

@@ -9,7 +9,6 @@
         <div class="sidebar-brand-text mx-3">Elsie RPMS</div>
     </a>
 
-    <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
@@ -20,13 +19,11 @@
         </a>
     </li>
 
-    <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Nav Item - House -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHouse" aria-expanded="true"
-            aria-controls="collapseHouse">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHouse" aria-expanded="true" aria-controls="collapseHouse">
             <i class="bi bi-buildings"></i>
             <span>House</span>
         </a>
@@ -41,13 +38,11 @@
         </div>
     </li>
 
-    <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Contract -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseContract"
-            aria-expanded="true" aria-controls="collapseContract">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseContract" aria-expanded="true" aria-controls="collapseContract">
             <i class="fa-solid fa-file-signature"></i>
             <span>Contract</span>
         </a>
@@ -61,12 +56,17 @@
         </div>
     </li>
 
-    <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Tenants -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTenants"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTenants" aria-expanded="true" aria-controls="collapseTenants">
+            <i class="fa-solid fa-users-viewfinder"></i>
+            <span>Tenants</span>
+        </a>
+        <div id="collapseTenants" class="collapse" aria-labelledby="headingTenants" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-
             aria-expanded="true" aria-controls="collapseTenants">
             <i class="fa-solid fa-users-viewfinder"></i>
             <span>Tenants</span>
